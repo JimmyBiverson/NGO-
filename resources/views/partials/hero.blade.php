@@ -68,22 +68,22 @@
 
             @foreach($textSlides as $index => $slide)
                 <div class="hero-text-slide {{ $index === 0 ? 'active' : '' }}" data-text="{{ $index }}">
-                    <div class="hero-reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest mb-6 hero-badge">
+                    <div data-slide-element="badge" class="hero-reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest mb-6 hero-badge">
                         <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
                         {{ $slide['badge'] }}
                     </div>
 
-                    <h1 class="hero-reveal text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-[1.05] tracking-tight mb-6">
+                    <h1 data-slide-element="heading" class="hero-reveal text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-[1.05] tracking-tight mb-6">
                         {!! $slide['heading'] !!}
                     </h1>
 
-                    <p class="hero-reveal text-lg sm:text-xl md:text-2xl text-white/80 max-w-xl leading-relaxed mb-10">
+                    <p data-slide-element="desc" class="hero-reveal text-lg sm:text-xl md:text-2xl text-white/80 max-w-xl leading-relaxed mb-10">
                         {{ $slide['desc'] }}
                     </p>
                 </div>
             @endforeach
 
-            <div class="hero-reveal flex flex-wrap items-center gap-4 mt-4">
+            <div data-slide-element="cta" class="hero-reveal flex flex-wrap items-center gap-4 mt-4">
                 <a href="{{ route('volunteer') }}"
                    class="magnetic-btn group inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-white font-semibold text-sm transition-all duration-300 shadow-xl shadow-amber-500/30 hover:shadow-amber-500/50 hero-cta-primary">
                     <span>Volunteer With Us</span>

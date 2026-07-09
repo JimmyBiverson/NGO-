@@ -1,3 +1,4 @@
+import { gsap } from 'gsap';
 import { initAnimations } from './animations';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,8 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const slideInterval = 7000;
     let slideTimer;
     let progressTimer;
+    let floatTween;
 
     function activateSlide(index) {
+        const prevIndex = textSlides.length > 0 ? Array.from(textSlides).findIndex(s => s.classList.contains('active')) : -1;
+
+        // Ken Burns background
         heroSlides.forEach((slide, i) => {
             slide.classList.toggle('active', i === index);
             slide.style.animation = 'none';
@@ -22,9 +27,77 @@ document.addEventListener('DOMContentLoaded', () => {
                 slide.style.animation = 'ken-burns-zoom 12s ease-in-out forwards';
             }
         });
+
+        // Text slides — GSAP transitions
         textSlides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === index);
+            const badge = slide.querySelector('[data-slide-element="badge"]');
+            const heading = slide.querySelector('[data-slide-element="heading"]');
+            const desc = slide.querySelector('[data-slide-element="desc"]');
+
+            if (i === index) {
+                slide.classList.add('active');
+                slide.style.position = 'relative';
+                slide.style.pointerEvents = 'auto';
+
+                const cta = document.querySelector('[data-slide-element="cta"]');
+
+                gsap.set([badge, heading, desc, cta], { clearProps: 'all' });
+                gsap.set(slide, { clearProps: 'opacity' });
+
+                const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+                tl.fromTo(badge,
+                    { y: -30, opacity: 0, scale: 0.8 },
+                    { y: 0, opacity: 1, scale: 1, duration: 0.6 }
+                )
+                .fromTo(heading,
+                    { y: 60, opacity: 0, rotateX: 15 },
+                    { y: 0, opacity: 1, rotateX: 0, duration: 0.8 },
+                    '-=0.3'
+                )
+                .fromTo(desc,
+                    { x: -40, opacity: 0 },
+                    { x: 0, opacity: 1, duration: 0.7 },
+                    '-=0.4'
+                )
+                .fromTo(cta,
+                    { y: 30, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 },
+                    '-=0.3'
+                );
+
+                if (floatTween) floatTween.kill();
+
+                floatTween = gsap.to(heading, {
+                    y: -8,
+                    duration: 2.5,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: 'sine.inOut',
+                    delay: 1.5,
+                });
+
+            } else if (i === prevIndex && prevIndex !== index) {
+                gsap.to([badge, heading, desc], {
+                    y: -20,
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: 'power2.in',
+                    onComplete: () => {
+                        slide.classList.remove('active');
+                        slide.style.position = 'absolute';
+                        slide.style.pointerEvents = 'none';
+                    },
+                });
+            } else {
+                slide.classList.remove('active');
+                slide.style.position = 'absolute';
+                slide.style.pointerEvents = 'none';
+                gsap.set([badge, heading, desc], { clearProps: 'all' });
+                gsap.set(slide, { opacity: 0 });
+            }
         });
+
         resetProgress();
     }
 
@@ -48,6 +121,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (heroSlides.length > 0) {
+        gsap.set(textSlides, { opacity: 0 });
+        textSlides.forEach((s, i) => {
+            if (i === 0) {
+                s.style.position = 'relative';
+                s.style.pointerEvents = 'auto';
+            } else {
+                s.style.position = 'absolute';
+                s.style.pointerEvents = 'none';
+            }
+        });
         activateSlide(0);
         slideTimer = setInterval(nextSlide, slideInterval);
     }
@@ -61,11 +144,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileOverlay = document.getElementById('mobile-overlay');
     const menuLines = document.querySelectorAll('.menu-line');
 
+    // Ensure header is visible immediately on pages without a hero
+    const heroSection = document.getElementById('hero');
+    if (!heroSection) {
+        header.classList.add('scrolled');
+    }
+
     let lastScroll = 0;
 
     window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
-        const heroSection = document.getElementById('hero');
 
         if (heroSection) {
             const heroBottom = heroSection.offsetHeight - 80;
