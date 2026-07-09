@@ -1,0 +1,424 @@
+import { initAnimations } from './animations';
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    // ============================================
+    // KEN BURNS HERO BACKGROUND + TEXT SLIDES
+    // ============================================
+    const heroSlides = document.querySelectorAll('.ken-burns-slide');
+    const textSlides = document.querySelectorAll('.hero-text-slide');
+    const progressBars = document.querySelectorAll('.ken-progress');
+    let currentSlide = 0;
+    const slideInterval = 7000;
+    let slideTimer;
+    let progressTimer;
+
+    function activateSlide(index) {
+        heroSlides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+            slide.style.animation = 'none';
+            slide.offsetHeight;
+            if (i === index) {
+                slide.style.animation = 'ken-burns-zoom 12s ease-in-out forwards';
+            }
+        });
+        textSlides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+        resetProgress();
+    }
+
+    function resetProgress() {
+        progressBars.forEach(bar => bar.style.width = '0%');
+        let width = 0;
+        const step = 100 / (slideInterval / 100);
+        if (progressTimer) clearInterval(progressTimer);
+        progressTimer = setInterval(() => {
+            width += step;
+            progressBars.forEach((bar, i) => {
+                if (i === currentSlide) bar.style.width = Math.min(width, 100) + '%';
+            });
+            if (width >= 100) clearInterval(progressTimer);
+        }, 100);
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % heroSlides.length;
+        activateSlide(currentSlide);
+    }
+
+    if (heroSlides.length > 0) {
+        activateSlide(0);
+        slideTimer = setInterval(nextSlide, slideInterval);
+    }
+
+    // ============================================
+    // HEADER SCROLL EFFECT
+    // ============================================
+    const header = document.getElementById('site-header');
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileOverlay = document.getElementById('mobile-overlay');
+    const menuLines = document.querySelectorAll('.menu-line');
+
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const heroSection = document.getElementById('hero');
+
+        if (heroSection) {
+            const heroBottom = heroSection.offsetHeight - 80;
+            header.classList.toggle('scrolled', scrollY > heroBottom);
+        } else {
+            header.classList.toggle('scrolled', scrollY > 60);
+        }
+
+        lastScroll = scrollY;
+    }, { passive: true });
+
+    // ============================================
+    // MOBILE MENU
+    // ============================================
+    if (mobileBtn && mobileMenu) {
+        mobileBtn.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.contains('visible');
+            if (isOpen) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        if (mobileOverlay) {
+            mobileOverlay.addEventListener('click', closeMenu);
+        }
+
+        function openMenu() {
+            mobileMenu.classList.remove('invisible', 'opacity-0');
+            mobileMenu.classList.add('visible');
+            mobileBtn.setAttribute('aria-expanded', 'true');
+            document.body.classList.add('menu-open');
+            setTimeout(() => {
+                mobileMenu.querySelector('.translate-x-full')?.classList.remove('translate-x-full');
+            }, 50);
+            menuLines.forEach(line => line.classList.add('bg-gray-800'));
+        }
+
+        function closeMenu() {
+            mobileMenu.querySelector('.translate-x-full')?.classList.add('translate-x-full');
+            mobileBtn.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('menu-open');
+            setTimeout(() => {
+                mobileMenu.classList.add('invisible', 'opacity-0');
+                mobileMenu.classList.remove('visible');
+            }, 500);
+            menuLines.forEach(line => line.classList.remove('bg-gray-800'));
+        }
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (link.getAttribute('href') && !link.getAttribute('href').startsWith('#')) {
+                    mobileMenu.classList.add('invisible', 'opacity-0');
+                    mobileMenu.classList.remove('visible');
+                    document.body.classList.remove('menu-open');
+                    mobileBtn.setAttribute('aria-expanded', 'false');
+                } else {
+                    closeMenu();
+                }
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('visible')) {
+                closeMenu();
+            }
+        });
+    }
+
+    // ============================================
+    // GALLERY FILTER
+    // ============================================
+    const filterBtns = document.querySelectorAll('.gallery-filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    if (filterBtns.length > 0) {
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                galleryItems.forEach(item => {
+                    const category = item.getAttribute('data-category');
+                    if (filter === 'all' || category === filter) {
+                        item.classList.remove('hidden');
+                        item.style.position = 'relative';
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    }
+
+    // ============================================
+    // LIGHTBOX
+    // ============================================
+    const lightboxTriggers = document.querySelectorAll('[data-lightbox]');
+    let lightboxEl = document.getElementById('lightbox');
+
+    if (lightboxTriggers.length > 0 && !lightboxEl) {
+        lightboxEl = document.createElement('div');
+        lightboxEl.id = 'lightbox';
+        lightboxEl.className = 'fixed inset-0 z-[100] flex items-center justify-center invisible opacity-0 transition-all duration-500 lightbox-overlay bg-black/85';
+        lightboxEl.innerHTML = `
+            <button class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors z-10" id="lightbox-close">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <button class="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors z-10" id="lightbox-prev">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button class="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors z-10" id="lightbox-next">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </button>
+            <div class="relative flex items-center justify-center p-4 w-full max-w-5xl max-h-[85vh]">
+                <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl">
+                <div id="lightbox-caption" class="absolute bottom-0 left-0 right-0 text-center text-white/80 text-sm py-4 bg-gradient-to-t from-black/60 to-transparent rounded-b-2xl px-6"></div>
+            </div>
+        `;
+        document.body.appendChild(lightboxEl);
+    }
+
+    if (lightboxEl) {
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const lightboxClose = document.getElementById('lightbox-close');
+        const lightboxPrev = document.getElementById('lightbox-prev');
+        const lightboxNext = document.getElementById('lightbox-next');
+        let currentLightboxIndex = 0;
+        let lightboxItems = [];
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const item = lightboxItems[index];
+            if (!item) return;
+            lightboxImg.src = item.img;
+            lightboxImg.alt = item.caption;
+            lightboxCaption.textContent = item.caption;
+            lightboxEl.classList.remove('invisible', 'opacity-0');
+            document.body.style.overflow = 'hidden';
+
+            lightboxPrev.style.display = lightboxItems.length > 1 ? 'flex' : 'none';
+            lightboxNext.style.display = lightboxItems.length > 1 ? 'flex' : 'none';
+        }
+
+        function closeLightbox() {
+            lightboxEl.classList.add('invisible', 'opacity-0');
+            document.body.style.overflow = '';
+        }
+
+        function prevLightbox() {
+            currentLightboxIndex = (currentLightboxIndex - 1 + lightboxItems.length) % lightboxItems.length;
+            const item = lightboxItems[currentLightboxIndex];
+            lightboxImg.src = item.img;
+            lightboxImg.alt = item.caption;
+            lightboxCaption.textContent = item.caption;
+        }
+
+        function nextLightbox() {
+            currentLightboxIndex = (currentLightboxIndex + 1) % lightboxItems.length;
+            const item = lightboxItems[currentLightboxIndex];
+            lightboxImg.src = item.img;
+            lightboxImg.alt = item.caption;
+            lightboxCaption.textContent = item.caption;
+        }
+
+        document.querySelectorAll('[data-lightbox]').forEach((trigger, index) => {
+            const img = trigger.querySelector('img');
+            const caption = trigger.getAttribute('data-caption') || trigger.querySelector('.gallery-item-title')?.textContent || '';
+            lightboxItems.push({
+                img: trigger.getAttribute('data-src') || img?.src || '',
+                caption: caption
+            });
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                openLightbox(index);
+            });
+        });
+
+        if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+        if (lightboxPrev) lightboxPrev.addEventListener('click', prevLightbox);
+        if (lightboxNext) lightboxNext.addEventListener('click', nextLightbox);
+
+        lightboxEl.addEventListener('click', (e) => {
+            if (e.target === lightboxEl) closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            const isHidden = lightboxEl.classList.contains('invisible');
+            if (!isHidden) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') prevLightbox();
+                if (e.key === 'ArrowRight') nextLightbox();
+            }
+        });
+    }
+
+    // ============================================
+    // FORM VALIDATION
+    // ============================================
+    const forms = document.querySelectorAll('form[data-validate]');
+    forms.forEach(form => {
+        form.addEventListener('submit', (e) => {
+            let valid = true;
+            const required = form.querySelectorAll('[required]');
+            required.forEach(field => {
+                const value = field.value.trim();
+                const errorEl = field.closest('.form-group')?.querySelector('.form-error');
+                if (!value) {
+                    field.classList.add('error');
+                    if (errorEl) errorEl.textContent = 'This field is required';
+                    valid = false;
+                } else {
+                    field.classList.remove('error');
+                    if (errorEl) errorEl.textContent = '';
+                    if (field.type === 'email' && !/\S+@\S+\.\S+/.test(value)) {
+                        field.classList.add('error');
+                        if (errorEl) errorEl.textContent = 'Please enter a valid email';
+                        valid = false;
+                    }
+                }
+            });
+            if (!valid) e.preventDefault();
+        });
+
+        form.querySelectorAll('.form-input').forEach(field => {
+            field.addEventListener('input', () => {
+                if (field.value.trim()) {
+                    field.classList.remove('error');
+                    const errorEl = field.closest('.form-group')?.querySelector('.form-error');
+                    if (errorEl) errorEl.textContent = '';
+                }
+            });
+        });
+    });
+
+    // ============================================
+    // SMOOTH SCROLL FOR ANCHOR LINKS
+    // ============================================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', (e) => {
+            const target = document.querySelector(anchor.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    // ============================================
+    // BACK TO TOP
+    // ============================================
+    const backToTop = document.getElementById('back-to-top');
+    if (backToTop) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        }, { passive: true });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // ============================================
+    // WHATSAPP FLOATING BUTTON
+    // ============================================
+    const whatsappBtn = document.getElementById('whatsapp-btn');
+    if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', () => {
+            window.open('https://wa.me/256393249878', '_blank', 'noopener,noreferrer');
+        });
+    }
+
+    // ============================================
+    // LANGUAGE SWITCHER
+    // ============================================
+    const langSwitcher = document.getElementById('lang-switcher');
+    if (langSwitcher) {
+        langSwitcher.addEventListener('change', function () {
+            const lang = this.value;
+            const url = new URL(window.location);
+            url.searchParams.set('lang', lang);
+            window.location = url.toString();
+        });
+    }
+
+    // ============================================
+    // DONATION MODAL
+    // ============================================
+    const donateBtns = document.querySelectorAll('[data-donate-modal]');
+    const donateModal = document.getElementById('donate-modal');
+    const donateOverlay = document.getElementById('donate-overlay');
+    const donateClose = document.getElementById('donate-close');
+
+    if (donateModal && donateOverlay) {
+        function openDonateModal() {
+            donateModal.classList.remove('invisible', 'opacity-0');
+            donateModal.querySelector('div')?.classList.remove('scale-90');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDonateModal() {
+            donateModal.querySelector('div')?.classList.add('scale-90');
+            donateModal.classList.add('invisible', 'opacity-0');
+            document.body.style.overflow = '';
+        }
+
+        donateBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openDonateModal();
+            });
+        });
+
+        if (donateClose) donateClose.addEventListener('click', closeDonateModal);
+        donateOverlay.addEventListener('click', closeDonateModal);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !donateModal.classList.contains('invisible')) {
+                closeDonateModal();
+            }
+        });
+    }
+
+    // ============================================
+    // NEWSLETTER FORM
+    // ============================================
+    const newsletterForm = document.getElementById('newsletter-form');
+    const newsletterSuccess = document.getElementById('newsletter-success');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = newsletterForm.querySelector('input[type="email"]').value;
+            if (email && /\S+@\S+\.\S+/.test(email)) {
+                newsletterForm.classList.add('hidden');
+                if (newsletterSuccess) {
+                    newsletterSuccess.classList.remove('hidden');
+                }
+            }
+        });
+    }
+
+    // ============================================
+    // INITIALIZE GSAP ANIMATIONS
+    // ============================================
+    initAnimations();
+
+    console.log('Community First Uganda — site initialized');
+});

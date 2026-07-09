@@ -1,0 +1,598 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../views';
+
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-serif: 'Instrument Serif', Georgia, serif;
+
+    --color-forest-50: #f0fdf4;
+    --color-forest-100: #dcfce7;
+    --color-forest-200: #bbf7d0;
+    --color-forest-300: #86efac;
+    --color-forest-400: #4ade80;
+    --color-forest-500: #22c55e;
+    --color-forest-600: #16a34a;
+    --color-forest-700: #15803d;
+    --color-forest-800: #166534;
+    --color-forest-900: #0B2B1D;
+    --color-forest-950: #052011;
+
+    --color-earth-50: #fff7ed;
+    --color-earth-100: #ffedd5;
+    --color-earth-200: #fed7aa;
+    --color-earth-300: #fdba74;
+    --color-earth-400: #fb923c;
+    --color-earth-500: #E65100;
+    --color-earth-600: #d9480f;
+    --color-earth-700: #b83a0a;
+    --color-earth-800: #9a3507;
+    --color-earth-900: #7c2d0b;
+
+    --color-sand-50: #fefce8;
+    --color-sand-100: #fef9c3;
+    --color-sand-200: #fef08a;
+    --color-sand-300: #fde047;
+    --color-sand-400: #facc15;
+    --color-sand-500: #ca8a04;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply antialiased;
+        cursor: default;
+    }
+
+    ::selection {
+        @apply bg-amber-500/30 text-forest-900;
+    }
+}
+
+@layer components {
+    .section-padding {
+        @apply py-16 sm:py-20 lg:py-28;
+    }
+
+    .section-title {
+        @apply text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight;
+    }
+
+    .section-subtitle {
+        @apply text-base sm:text-lg text-gray-600 max-w-2xl leading-relaxed;
+    }
+
+    .glass-card {
+        @apply bg-white/80 backdrop-blur-xl border border-white/20 shadow-xl;
+    }
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}
+
+/* ============================================
+   KEYFRAMES
+   ============================================ */
+@keyframes ken-burns-zoom {
+    0% { transform: scale(1) translate(0, 0); }
+    50% { transform: scale(1.1) translate(-1%, -1%); }
+    100% { transform: scale(1) translate(0, 0); }
+}
+
+@keyframes fade-in-up {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in-left {
+    0% { opacity: 0; transform: translateX(-40px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fade-in-right {
+    0% { opacity: 0; transform: translateX(40px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fade-in-scale {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes scroll-down {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(8px); }
+}
+
+@keyframes pulse-soft {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes pulse-ring {
+    0% { transform: scale(0.95); opacity: 0.7; }
+    50% { transform: scale(1.05); opacity: 0.3; }
+    100% { transform: scale(0.95); opacity: 0.7; }
+}
+
+@keyframes loader-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes whatsapp-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
+    70% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+.animate-scroll-down {
+    animation: scroll-down 1.5s ease-in-out infinite;
+}
+
+.animate-float {
+    animation: float 4s ease-in-out infinite;
+}
+
+.animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+}
+
+.animate-shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.animate-shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: shimmer 2s infinite;
+    transform: translateX(-100%);
+}
+
+.animate-pulse-ring {
+    animation: pulse-ring 3s ease-in-out infinite;
+}
+
+/* ============================================
+   SCROLL PROGRESS BAR
+   ============================================ */
+#scroll-progress {
+    transform-origin: left center;
+    will-change: transform;
+}
+
+/* ============================================
+   PAGE LOADER
+   ============================================ */
+#page-loader {
+    z-index: 9999;
+}
+
+/* ============================================
+   KEN BURNS SLIDER
+   ============================================ */
+.ken-burns-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    will-change: transform, opacity;
+}
+
+.ken-burns-slide.active {
+    opacity: 1;
+    z-index: 1;
+    animation: ken-burns-zoom 12s ease-in-out forwards;
+}
+
+.ken-progress {
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+/* ============================================
+   HERO TEXT SLIDES
+   ============================================ */
+.hero-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.hero-text-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+}
+
+.hero-text-slide.active {
+    position: relative;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* ============================================
+   SPLIT TEXT
+   ============================================ */
+.split-char {
+    display: inline-block;
+    will-change: transform, opacity;
+}
+
+/* ============================================
+   REVEAL ANIMATIONS (initial state — GSAP handles them)
+   ============================================ */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-40px);
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(40px);
+}
+
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.92);
+}
+
+.stagger-children > .stagger-item {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* ============================================
+   COUNTER
+   ============================================ */
+.counter-number {
+    display: inline-block;
+}
+
+/* ============================================
+   CARD HOVER EFFECTS
+   ============================================ */
+.card-hover {
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.15);
+}
+
+.card-hover:hover .card-image img {
+    transform: scale(1.08);
+}
+
+.card-image {
+    overflow: hidden;
+}
+
+.card-image img {
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================
+   TILT CARD (3D)
+   ============================================ */
+.tilt-card {
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.tilt-card .tilt-card-content {
+    transform: translateZ(30px);
+}
+
+/* ============================================
+   HERO CTA
+   ============================================ */
+.hero-cta-primary {
+    background: linear-gradient(135deg, #E65100, #FF6F00, #FF8F00);
+    background-size: 200% 200%;
+    animation: gradient-shift 4s ease infinite;
+}
+
+.donate-btn {
+    background: linear-gradient(135deg, #E65100, #FF6F00);
+}
+
+.donate-btn:hover {
+    background: linear-gradient(135deg, #FF6F00, #E65100);
+}
+
+.hero-badge {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* ============================================
+   GALLERY
+   ============================================ */
+.gallery-filter-btn {
+    transition: all 0.3s ease;
+}
+
+.gallery-filter-btn.active {
+    @apply bg-forest-900 text-white shadow-lg shadow-forest-900/25;
+}
+
+.gallery-item {
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-item.hidden {
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+    position: absolute;
+}
+
+.lightbox-overlay {
+    backdrop-filter: blur(20px);
+}
+
+/* ============================================
+   HEADER SCROLL STATES
+   ============================================ */
+#site-header.scrolled {
+    @apply bg-white/90 shadow-lg shadow-black/5;
+}
+
+#site-header.scrolled .header-logo {
+    @apply bg-forest-900 border-forest-200;
+}
+
+#site-header.scrolled .header-logo-text {
+    @apply text-white;
+}
+
+#site-header.scrolled .header-site-name {
+    @apply text-gray-900;
+}
+
+#site-header.scrolled .nav-link {
+    @apply text-gray-600;
+}
+
+#site-header.scrolled .nav-link:hover {
+    @apply text-gray-900 bg-gray-100;
+}
+
+#site-header.scrolled .nav-link.text-white {
+    @apply text-forest-900 bg-forest-50;
+}
+
+#site-header.scrolled #mobile-menu-btn {
+    @apply text-gray-700;
+}
+
+/* ============================================
+   FORMS
+   ============================================ */
+.form-input {
+    @apply w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-400 transition-all duration-300;
+}
+
+.form-input:focus {
+    @apply outline-none ring-2 ring-forest-500/30 border-forest-500 shadow-lg shadow-forest-500/10;
+}
+
+.form-input.error {
+    @apply border-red-400 ring-2 ring-red-500/20;
+}
+
+.form-label {
+    @apply block text-sm font-medium text-gray-700 mb-1.5;
+}
+
+/* ============================================
+   PROGRAM SECTIONS
+   ============================================ */
+.program-section:nth-child(even) {
+    @apply bg-gray-50;
+}
+
+/* ============================================
+   MOBILE MENU
+   ============================================ */
+body.menu-open {
+    overflow: hidden;
+}
+
+/* ============================================
+   BACK TO TOP
+   ============================================ */
+#back-to-top {
+    @apply fixed bottom-8 right-8 z-40 w-12 h-12 rounded-full bg-forest-900 text-white shadow-xl shadow-forest-900/30 flex items-center justify-center opacity-0 invisible transition-all duration-300 cursor-pointer;
+}
+
+#back-to-top.visible {
+    @apply opacity-100 visible;
+}
+
+#back-to-top:hover {
+    @apply bg-forest-800 transform -translate-y-1;
+}
+
+/* ============================================
+   CUSTOM CURSOR
+   ============================================ */
+#custom-cursor {
+    pointer-events: none;
+    will-change: transform;
+    z-index: 9998;
+    mix-blend-mode: difference;
+}
+
+#cursor-dot {
+    pointer-events: none;
+    will-change: transform;
+    z-index: 9999;
+}
+
+/* ============================================
+   WHATSAPP BUTTON
+   ============================================ */
+#whatsapp-btn {
+    animation: whatsapp-pulse 2s infinite;
+}
+
+/* ============================================
+   DONATION MODAL
+   ============================================ */
+#donate-modal > div {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ============================================
+   NEWSLETTER
+   ============================================ */
+.newsletter-input:focus + .newsletter-btn {
+    @apply bg-amber-500;
+}
+
+/* ============================================
+   PARTICLE CONTAINER
+   ============================================ */
+.particle-container {
+    overflow: hidden;
+}
+
+/* ============================================
+   MORPH SHAPES
+   ============================================ */
+.morph-shape svg {
+    overflow: visible;
+}
+
+/* ============================================
+   CLIP REVEAL
+   ============================================ */
+.clip-reveal {
+    will-change: clip-path;
+}
+
+/* ============================================
+   PARALLAX
+   ============================================ */
+.parallax-bg {
+    will-change: transform;
+}
+
+/* ============================================
+   LANGUAGE SWITCHER
+   ============================================ */
+#lang-switcher option {
+    @apply text-gray-900;
+}
+
+/* ============================================
+   NOISE TEXTURE OVERLAY
+   ============================================ */
+.noise-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ============================================
+   PARTNER LOGO SLIDER
+   ============================================ */
+.partner-track {
+    display: flex;
+    animation: partner-scroll 30s linear infinite;
+}
+
+@keyframes partner-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.partner-track:hover {
+    animation-play-state: paused;
+}
+
+/* ============================================
+   FAQ ACCORDION
+   ============================================ */
+.faq-answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-answer.open {
+    grid-template-rows: 1fr;
+}
+
+.faq-answer > div {
+    overflow: hidden;
+}
+
+/* ============================================
+   BLOG CARDS
+   ============================================ */
+.blog-card-image {
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.blog-card:hover .blog-card-image {
+    transform: scale(1.08);
+}
+
+/* ============================================
+   RESPONSIVE HELPERS
+   ============================================ */
+@media (max-width: 768px) {
+    #custom-cursor, #cursor-dot {
+        display: none !important;
+    }
+}
