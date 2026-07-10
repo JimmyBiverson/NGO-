@@ -236,6 +236,11 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileOverlay.addEventListener('click', closeMenu);
         }
 
+        const closeBtn = document.getElementById('mobile-menu-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeMenu);
+        }
+
         function openMenu() {
             if (menuTween) menuTween.kill();
 

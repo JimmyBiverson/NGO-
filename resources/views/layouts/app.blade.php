@@ -191,6 +191,11 @@
             <div id="mobile-menu" class="lg:hidden fixed inset-0 z-40 invisible opacity-0">
                 <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="mobile-overlay"></div>
                 <div class="mobile-menu-panel absolute top-0 right-0 w-72 sm:w-80 h-full shadow-2xl">
+                    <button id="mobile-menu-close" type="button" class="absolute top-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/50 bg-white/70 text-gray-800 shadow-lg shadow-black/10 backdrop-blur transition hover:bg-white/90" aria-label="Close menu">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                     <div class="flex flex-col pt-20 px-6">
                         {{-- Mobile language --}}
                         <div class="mb-6 pb-6 border-b border-gray-100">
