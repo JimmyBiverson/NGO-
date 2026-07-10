@@ -124,16 +124,17 @@
     <div id="app" class="relative">
 
         {{-- Header --}}
-        <header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-out">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-colors duration-700 ease-out">
+            <div id="header-border" class="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-amber-500/0 via-amber-500/0 to-amber-500/0 transition-all duration-700"></div>
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16 lg:h-20">
 
                     {{-- Logo --}}
                     <a href="{{ route('home') }}" class="flex items-center gap-3 group">
-                        <div class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white font-bold text-lg transition-all duration-300 group-hover:bg-white/30 header-logo">
+                        <div class="w-10 h-10 rounded-full bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center text-white font-bold text-lg transition-all duration-500 group-hover:bg-white/25 header-logo">
                             <span class="header-logo-text text-white">CFU</span>
                         </div>
-                        <span class="font-semibold text-lg tracking-tight transition-colors duration-300 header-site-name text-white">{{ __('common.site_name') }}</span>
+                        <span class="font-semibold text-lg tracking-tight transition-colors duration-500 header-site-name text-white">{{ __('common.site_name') }}</span>
                     </a>
 
                     {{-- Language Switcher --}}
@@ -161,13 +162,14 @@
                         @endphp
                         @foreach($navItems as $item)
                             <a href="{{ route($item['route']) }}"
-                               class="nav-link px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300
-                                      {{ request()->routeIs($item['route']) ? 'text-white bg-white/15' : 'text-white/80 hover:text-white hover:bg-white/10' }}">
+                               class="nav-link relative px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300
+                                      {{ request()->routeIs($item['route']) ? 'text-white bg-white/15 nav-link-active' : 'text-white/80 hover:text-white hover:bg-white/10' }}">
                                 {{ $item['label'] }}
+                                <span class="nav-link-underline"></span>
                             </a>
                         @endforeach
                         <a href="#" data-donate-modal
-                           class="ml-3 magnetic-btn donate-btn inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-full text-white transition-all duration-300 shadow-lg shadow-amber-500/25">
+                           class="ml-3 magnetic-btn donate-btn inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-full text-white transition-all duration-300 shadow-lg shadow-amber-500/25 donate-btn-glow">
                             <span>{{ __('common.donate') }}</span>
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                         </a>
@@ -186,9 +188,9 @@
             </div>
 
             {{-- Mobile Menu --}}
-            <div id="mobile-menu" class="lg:hidden fixed inset-0 z-40 invisible opacity-0 transition-all duration-500">
+            <div id="mobile-menu" class="lg:hidden fixed inset-0 z-40 invisible opacity-0">
                 <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="mobile-overlay"></div>
-                <div class="absolute top-0 right-0 w-72 sm:w-80 h-full bg-white shadow-2xl transform translate-x-full transition-transform duration-500 ease-out">
+                <div class="mobile-menu-panel absolute top-0 right-0 w-72 sm:w-80 h-full bg-white shadow-2xl">
                     <div class="flex flex-col pt-20 px-6">
                         {{-- Mobile language --}}
                         <div class="mb-6 pb-6 border-b border-gray-100">
@@ -199,13 +201,13 @@
                             </select>
                         </div>
                         @foreach($navItems as $item)
-                            <a href="{{ route($item['route']) }}"
-                               class="py-3 text-lg font-medium text-gray-800 border-b border-gray-100 transition-colors hover:text-amber-600 {{ request()->routeIs($item['route']) ? 'text-amber-600' : '' }}">
+                            <a href="{{ route($item['route']) }}" data-mobile-link
+                               class="mobile-nav-link py-3 text-lg font-medium text-gray-800 border-b border-gray-100 transition-colors hover:text-amber-600 {{ request()->routeIs($item['route']) ? 'text-amber-600' : '' }}">
                                 {{ $item['label'] }}
                             </a>
                         @endforeach
-                        <a href="#" data-donate-modal
-                           class="mt-6 inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-semibold rounded-full text-white transition-all duration-300 donate-btn shadow-lg">
+                        <a href="#" data-donate-modal data-mobile-link
+                           class="mobile-nav-link mt-6 inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-semibold rounded-full text-white transition-all duration-300 donate-btn shadow-lg">
                             <span>{{ __('common.donate') }}</span>
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                         </a>

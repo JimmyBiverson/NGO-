@@ -8,6 +8,7 @@
     {{-- Page Hero --}}
     <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 bg-forest-900 overflow-hidden">
         <div class="particle-container absolute inset-0 z-0"></div>
+        <div class="absolute inset-0 z-[1] bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1920&q=85');"></div>
         <div class="absolute inset-0 opacity-10 noise-overlay"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <span class="inline-block text-xs font-semibold uppercase tracking-widest text-amber-400 bg-white/10 px-4 py-1.5 rounded-full mb-4 reveal">Join Our Mission</span>
@@ -84,6 +85,7 @@
                             'location' => 'Community Center, Kampala',
                             'desc' => 'Help teach English, computer skills, and provide homework support to community members of all ages.',
                             'requirements' => ['Basic English proficiency', 'Patience and empathy', 'Commitment to regular schedule', 'Interest in teaching'],
+                            'icon' => '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 4.5 7.5 4.5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 17.5 7.5 17.5s3.332.977 4.5 1.753m0-13C13.168 5.477 14.754 4.5 16.5 4.5c1.747 0 3.332.977 4.5 1.753v13C19.832 18.477 18.247 17.5 16.5 17.5c-1.746 0-3.332.977-4.5 1.753"/></svg>',
                         ],
                         [
                             'title' => 'Healthcare Assistant',
@@ -91,6 +93,7 @@
                             'location' => 'Various Community Locations',
                             'desc' => 'Support our medical camps and health awareness programs in the community.',
                             'requirements' => ['Interest in healthcare', 'Good communication skills', 'Flexibility with schedule', 'Team collaboration'],
+                            'icon' => '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>',
                         ],
                         [
                             'title' => 'Sports & Recreation Coordinator',
@@ -98,6 +101,7 @@
                             'location' => 'Community Sports Grounds',
                             'desc' => 'Lead futsal training sessions, aerobics classes, and organize youth sports activities.',
                             'requirements' => ['Sports background preferred', 'Leadership skills', 'Youth mentoring experience', 'Energy and enthusiasm'],
+                            'icon' => '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
                         ],
                         [
                             'title' => 'Skills Development Trainer',
@@ -105,6 +109,7 @@
                             'location' => 'Community Center',
                             'desc' => 'Teach vocational skills like crocheting, tailoring, henna art, or soap making to community members.',
                             'requirements' => ['Proficiency in a vocational skill', 'Patience in teaching', 'Creative mindset', 'Commitment to regular schedule'],
+                            'icon' => '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>',
                         ],
                         [
                             'title' => 'Administrative Support',
@@ -112,6 +117,7 @@
                             'location' => 'Community Center',
                             'desc' => 'Assist with record keeping, data entry, communication, and general administrative tasks.',
                             'requirements' => ['Basic computer skills', 'Organizational abilities', 'Attention to detail', 'Reliability'],
+                            'icon' => '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>',
                         ],
                         [
                             'title' => 'Community Outreach Volunteer',
@@ -119,12 +125,14 @@
                             'location' => 'Various Locations',
                             'desc' => 'Help with community mobilization, awareness campaigns, and home welfare visits.',
                             'requirements' => ['Good interpersonal skills', 'Knowledge of local area', 'Compassionate approach', 'Flexibility'],
+                            'icon' => '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>',
                         ],
                     ];
                 @endphp
 
                 @foreach($roles as $role)
                     <div class="stagger-item group card-hover tilt-card bg-white rounded-2xl p-7 border border-gray-100 shadow-sm">
+                        <div class="w-12 h-12 rounded-xl bg-forest-50 flex items-center justify-center text-forest-700 mb-4 group-hover:bg-forest-100 group-hover:scale-110 transition-all duration-300">{!! $role['icon'] !!}</div>
                         <div class="flex items-center gap-3 mb-4">
                             <span class="text-xs font-semibold bg-forest-50 text-forest-700 px-3 py-1 rounded-full">{{ $role['hours'] }}</span>
                             <span class="text-xs text-gray-400">{{ $role['location'] }}</span>
@@ -156,7 +164,13 @@
     <section class="py-16 bg-white">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="reveal bg-forest-50 rounded-2xl p-8 lg:p-12 text-center">
-                <svg class="w-8 h-8 text-amber-400 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg>
+                <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4 shadow-md ring-2 ring-white">
+                    <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?w=150&q=85&fit=crop&crop=face"
+                         alt="Sarah, Education Volunteer"
+                         loading="lazy"
+                         class="w-full h-full object-cover"
+                         onerror="this.parentElement.className='w-16 h-16 rounded-full bg-amber-100 mx-auto mb-4 flex items-center justify-center'; this.outerHTML='<svg class=\'w-8 h-8 text-amber-400\' fill=\'currentColor\' viewBox=\'0 0 24 24\'><path d=\'M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z\'/></svg>'">
+                </div>
                 <blockquote class="text-lg sm:text-xl text-gray-700 font-serif italic leading-relaxed mb-6">
                     &ldquo;Volunteering at Community First Uganda has been one of the most rewarding experiences. Seeing the smiles on the children's faces when they learn something new — that's what keeps me coming back.&rdquo;
                 </blockquote>

@@ -8,6 +8,7 @@
     {{-- Page Hero --}}
     <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 bg-forest-900 overflow-hidden">
         <div class="particle-container absolute inset-0 z-0"></div>
+        <div class="absolute inset-0 z-[1] bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1920&q=85');"></div>
         <div class="absolute inset-0 opacity-10 noise-overlay"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <span class="inline-block text-xs font-semibold uppercase tracking-widest text-amber-400 bg-white/10 px-4 py-1.5 rounded-full mb-4 reveal">Get in Touch</span>
@@ -163,12 +164,12 @@
                         </h3>
                         <p class="text-sm text-gray-600">Noor Emporium, Mengo Hill Road, Kampala, Uganda</p>
                         <p class="text-xs text-gray-400 mt-1">Located near Mengo Hospital, opposite the market</p>
-                        <div class="mt-4 rounded-xl overflow-hidden bg-gray-100 h-48 flex items-center justify-center">
-                            <div class="text-center text-gray-400">
-                                <svg class="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                <span class="text-xs">Map: Mengo Hill Rd, Kampala</span>
-                                <a href="https://www.google.com/maps/search/Noor+Emporium+Mengo+Hill+Rd+Kampala" target="_blank" rel="noopener noreferrer" class="block text-xs text-forest-600 hover:text-amber-600 mt-1 font-medium">Open in Google Maps</a>
-                            </div>
+                        <div class="mt-4 rounded-xl overflow-hidden h-48">
+                            <img src="https://images.unsplash.com/photo-1577415124269-fc114e4a84db?w=800&q=85"
+                                 alt="Our Location - Kampala"
+                                 loading="lazy"
+                                 class="w-full h-full object-cover"
+                                 onerror="this.parentElement.className='mt-4 rounded-xl overflow-hidden bg-gray-100 h-48 flex items-center justify-center'; this.outerHTML='<div class=\'text-center text-gray-400\'><svg class=\'w-8 h-8 mx-auto mb-2\' fill=\'none\' stroke=\'currentColor\' viewBox=\'0 0 24 24\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z\'/><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M15 11a3 3 0 11-6 0 3 3 0 016 0z\'/></svg><span class=\'text-xs\'>Map: Mengo Hill Rd, Kampala</span><a href=\'https://www.google.com/maps/search/Noor+Emporium+Mengo+Hill+Rd+Kampala\' target=\'_blank\' rel=\'noopener noreferrer\' class=\'block text-xs text-forest-600 hover:text-amber-600 mt-1 font-medium\'>Open in Google Maps</a></div>'">
                         </div>
                     </div>
 

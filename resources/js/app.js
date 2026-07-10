@@ -1,5 +1,8 @@
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { initAnimations } from './animations';
+
+gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -136,39 +139,90 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ============================================
-    // HEADER SCROLL EFFECT
+    // HEADER GLASS SCROLL EFFECT (GSAP Scrub)
     // ============================================
     const header = document.getElementById('site-header');
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileOverlay = document.getElementById('mobile-overlay');
     const menuLines = document.querySelectorAll('.menu-line');
-
-    // Ensure header is visible immediately on pages without a hero
     const heroSection = document.getElementById('hero');
-    if (!heroSection) {
-        header.classList.add('scrolled');
+
+    if (header) {
+        if (heroSection) {
+            const heroH = heroSection.offsetHeight;
+
+            const headerTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: heroSection,
+                    start: 'top top',
+                    end: () => `+=${heroH}`,
+                    scrub: 0.6,
+                },
+            });
+
+            headerTl
+                .to(header, {
+                    backgroundColor: 'rgba(0,0,0,0.25)',
+                    backdropFilter: 'blur(8px)',
+                    webkitBackdropFilter: 'blur(8px)',
+                    duration: 0.5,
+                })
+                .to(header, {
+                    backgroundColor: 'rgba(255,255,255,0.88)',
+                    backdropFilter: 'blur(20px)',
+                    webkitBackdropFilter: 'blur(20px)',
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04)',
+                    duration: 0.5,
+                }, '>')
+                .to('.header-logo', { backgroundColor: '#166534', borderColor: '#bbf7d0', duration: 0.4 }, '>')
+                .to('.header-logo-text', { color: '#ffffff', duration: 0.3 }, '>')
+                .to('.header-site-name', { color: '#111827', duration: 0.3 }, '>')
+                .to('.nav-link', { color: '#4b5563', duration: 0.3 }, '>')
+                .to('.nav-link.nav-link-active', { color: '#166534', backgroundColor: '#f0fdf4', duration: 0.3 }, '>')
+                .to('#mobile-menu-btn', { color: '#374151', duration: 0.3 }, '>')
+                .to('#header-border', {
+                    '--tw-gradient-from': '#f59e0b',
+                    '--tw-gradient-via': '#10b981',
+                    '--tw-gradient-to': '#f59e0b',
+                    opacity: 1,
+                    duration: 0.4,
+                }, '>');
+
+            ScrollTrigger.create({
+                trigger: heroSection,
+                start: 'top top',
+                end: 'bottom top',
+                onEnter: () => { header.classList.add('in-hero'); },
+                onLeave: () => { header.classList.remove('in-hero'); },
+                onEnterBack: () => { header.classList.add('in-hero'); },
+                onLeaveBack: () => { header.classList.remove('in-hero'); },
+            });
+        } else {
+            header.classList.add('scrolled');
+            gsap.set(header, {
+                backgroundColor: 'rgba(255,255,255,0.88)',
+                backdropFilter: 'blur(20px)',
+                webkitBackdropFilter: 'blur(20px)',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04)',
+            });
+            gsap.set('.header-logo', { backgroundColor: '#166534', borderColor: '#bbf7d0' });
+            gsap.set('.header-logo-text', { color: '#ffffff' });
+            gsap.set('.header-site-name', { color: '#111827' });
+            gsap.set('.nav-link', { color: '#4b5563' });
+            gsap.set('.nav-link.nav-link-active', { color: '#166534', backgroundColor: '#f0fdf4' });
+            gsap.set('#mobile-menu-btn', { color: '#374151' });
+        }
     }
 
-    let lastScroll = 0;
-
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-
-        if (heroSection) {
-            const heroBottom = heroSection.offsetHeight - 80;
-            header.classList.toggle('scrolled', scrollY > heroBottom);
-        } else {
-            header.classList.toggle('scrolled', scrollY > 60);
-        }
-
-        lastScroll = scrollY;
-    }, { passive: true });
-
     // ============================================
-    // MOBILE MENU
+    // MOBILE MENU (GSAP Stagger)
     // ============================================
     if (mobileBtn && mobileMenu) {
+        const panel = mobileMenu.querySelector('.mobile-menu-panel');
+        const links = mobileMenu.querySelectorAll('[data-mobile-link]');
+        let menuTween;
+
         mobileBtn.addEventListener('click', () => {
             const isOpen = mobileMenu.classList.contains('visible');
             if (isOpen) {
@@ -183,25 +237,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function openMenu() {
+            if (menuTween) menuTween.kill();
+
             mobileMenu.classList.remove('invisible', 'opacity-0');
             mobileMenu.classList.add('visible');
             mobileBtn.setAttribute('aria-expanded', 'true');
             document.body.classList.add('menu-open');
-            setTimeout(() => {
-                mobileMenu.querySelector('.translate-x-full')?.classList.remove('translate-x-full');
-            }, 50);
             menuLines.forEach(line => line.classList.add('bg-gray-800'));
+
+            gsap.set(panel, { x: '100%', visibility: 'visible' });
+            gsap.set(links, { opacity: 0, x: 30 });
+
+            menuTween = gsap.timeline();
+            menuTween
+                .to(panel, { x: '0%', duration: 0.5, ease: 'power3.out' })
+                .to(links, { x: 0, opacity: 1, duration: 0.4, stagger: 0.06, ease: 'power2.out' }, '-=0.2');
         }
 
         function closeMenu() {
-            mobileMenu.querySelector('.translate-x-full')?.classList.add('translate-x-full');
+            if (menuTween) menuTween.kill();
+
             mobileBtn.setAttribute('aria-expanded', 'false');
             document.body.classList.remove('menu-open');
-            setTimeout(() => {
-                mobileMenu.classList.add('invisible', 'opacity-0');
-                mobileMenu.classList.remove('visible');
-            }, 500);
             menuLines.forEach(line => line.classList.remove('bg-gray-800'));
+
+            menuTween = gsap.timeline();
+            menuTween
+                .to(links, { x: 30, opacity: 0, duration: 0.2, stagger: 0.02, ease: 'power2.in' })
+                .to(panel, { x: '100%', duration: 0.4, ease: 'power3.in' }, '-=0.1')
+                .call(() => {
+                    mobileMenu.classList.add('invisible', 'opacity-0');
+                    mobileMenu.classList.remove('visible');
+                });
         }
 
         mobileMenu.querySelectorAll('a').forEach(link => {

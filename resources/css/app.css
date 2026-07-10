@@ -376,12 +376,35 @@
 }
 
 /* ============================================
-   HEADER SCROLL STATES
+   HEADER — GLASS STATES (Multi-State Transition)
    ============================================ */
-#site-header.scrolled {
-    @apply bg-white/90 shadow-lg shadow-black/5;
+#site-header {
+    background: rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    box-shadow: none;
 }
 
+#site-header.header-glass-mid {
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+#site-header.scrolled {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+#site-header.scrolled #header-border {
+    --tw-gradient-from: #f59e0b;
+    --tw-gradient-via: #10b981;
+    --tw-gradient-to: #f59e0b;
+}
+
+/* Logo morph */
 #site-header.scrolled .header-logo {
     @apply bg-forest-900 border-forest-200;
 }
@@ -402,12 +425,79 @@
     @apply text-gray-900 bg-gray-100;
 }
 
-#site-header.scrolled .nav-link.text-white {
+#site-header.scrolled .nav-link.nav-link-active {
     @apply text-forest-900 bg-forest-50;
 }
 
 #site-header.scrolled #mobile-menu-btn {
     @apply text-gray-700;
+}
+
+/* Nav link underline animation */
+.nav-link {
+    position: relative;
+}
+
+.nav-link-underline {
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #f59e0b;
+    border-radius: 1px;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover .nav-link-underline {
+    width: 60%;
+    left: 20%;
+}
+
+.nav-link.nav-link-active .nav-link-underline {
+    width: 40%;
+    left: 30%;
+    background: #22c55e;
+}
+
+/* Donate button glow pulse */
+.donate-btn-glow {
+    position: relative;
+}
+
+.donate-btn-glow::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 9999px;
+    background: conic-gradient(from 0deg, #f59e0b, #22c55e, #f59e0b, #22c55e, #f59e0b);
+    opacity: 0.35;
+    animation: glow-rotate 3s linear infinite;
+    z-index: -1;
+    transition: opacity 0.5s;
+}
+
+#site-header.scrolled .donate-btn-glow::before {
+    opacity: 0;
+}
+
+@keyframes glow-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Mobile menu — GSAP will handle transform, this is initial hidden */
+#mobile-menu {
+    pointer-events: none;
+}
+
+#mobile-menu.visible {
+    pointer-events: auto;
+}
+
+.mobile-nav-link {
+    opacity: 0;
+    transform: translateX(30px);
 }
 
 /* ============================================

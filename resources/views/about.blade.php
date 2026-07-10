@@ -8,6 +8,7 @@
     {{-- Page Hero --}}
     <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 bg-forest-900 overflow-hidden">
         <div class="particle-container absolute inset-0 z-0"></div>
+        <div class="absolute inset-0 z-[1] bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=1920&q=85');"></div>
         <div class="absolute inset-0 opacity-10 noise-overlay"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <span class="inline-block text-xs font-semibold uppercase tracking-widest text-amber-400 bg-white/10 px-4 py-1.5 rounded-full mb-4 reveal">Indigenous NGO Since 2020</span>
@@ -21,8 +22,9 @@
     </section>
 
     {{-- Quote --}}
-    <section class="py-16 bg-gray-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="relative py-16 bg-gray-50 overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center opacity-[0.04]" style="background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1920&q=85');"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="relative reveal">
                 <svg class="w-10 h-10 text-amber-300 mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg>
                 <blockquote class="text-xl sm:text-2xl text-gray-700 font-serif italic leading-relaxed">
@@ -105,8 +107,12 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto stagger-children">
                 <div class="stagger-item tilt-card bg-white rounded-2xl p-8 lg:p-10 shadow-sm border border-gray-100 card-hover text-center">
-                    <div class="w-28 h-28 rounded-full bg-gradient-to-br from-forest-100 to-forest-200 mx-auto mb-6 flex items-center justify-center">
-                        <svg class="w-14 h-14 text-forest-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                    <div class="w-28 h-28 rounded-full overflow-hidden mx-auto mb-6 shadow-lg ring-2 ring-forest-100">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=85&fit=crop&crop=face"
+                             alt="Philip Onen"
+                             loading="lazy"
+                             class="w-full h-full object-cover"
+                             onerror="this.parentElement.className='w-28 h-28 rounded-full bg-gradient-to-br from-forest-100 to-forest-200 mx-auto mb-6 flex items-center justify-center'; this.outerHTML='<svg class=\'w-14 h-14 text-forest-600\' fill=\'none\' stroke=\'currentColor\' viewBox=\'0 0 24 24\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z\'/></svg>'">
                     </div>
                     <h3 class="text-2xl font-bold text-gray-900">Philip Onen</h3>
                     <p class="text-amber-600 font-medium mb-4">Executive Director</p>
@@ -115,8 +121,12 @@
                     </p>
                 </div>
                 <div class="stagger-item tilt-card bg-white rounded-2xl p-8 lg:p-10 shadow-sm border border-gray-100 card-hover text-center">
-                    <div class="w-28 h-28 rounded-full bg-gradient-to-br from-amber-100 to-amber-200 mx-auto mb-6 flex items-center justify-center">
-                        <svg class="w-14 h-14 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/></svg>
+                    <div class="w-28 h-28 rounded-full overflow-hidden mx-auto mb-6 shadow-lg ring-2 ring-amber-100">
+                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=200&q=85&fit=crop&crop=face"
+                             alt="Community Team"
+                             loading="lazy"
+                             class="w-full h-full object-cover"
+                             onerror="this.parentElement.className='w-28 h-28 rounded-full bg-gradient-to-br from-amber-100 to-amber-200 mx-auto mb-6 flex items-center justify-center'; this.outerHTML='<svg class=\'w-14 h-14 text-amber-600\' fill=\'none\' stroke=\'currentColor\' viewBox=\'0 0 24 24\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z\'/></svg>'">
                     </div>
                     <h3 class="text-2xl font-bold text-gray-900">Community Team</h3>
                     <p class="text-amber-600 font-medium mb-4">Program Coordinators & Volunteers</p>

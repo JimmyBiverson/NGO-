@@ -8,6 +8,7 @@
     {{-- Page Hero --}}
     <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 bg-forest-900 overflow-hidden">
         <div class="particle-container absolute inset-0 z-0"></div>
+        <div class="absolute inset-0 z-[1] bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=1920&q=85');"></div>
         <div class="absolute inset-0 opacity-10 noise-overlay"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <span class="inline-block text-xs font-semibold uppercase tracking-widest text-amber-400 bg-white/10 px-4 py-1.5 rounded-full mb-4 reveal">4 Core Programming Areas</span>
@@ -26,14 +27,15 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 stagger-children">
                 @php
                     $stats = [
-                        ['number' => '4', 'label' => 'Core Programs', 'suffix' => ''],
-                        ['number' => '3', 'label' => 'Terms Per Year', 'suffix' => ''],
-                        ['number' => '18', 'label' => 'Activities Offered', 'suffix' => '+'],
-                        ['number' => '365', 'label' => 'Year-Round Access', 'suffix' => ''],
+                        ['number' => '4', 'label' => 'Core Programs', 'suffix' => '', 'icon' => '<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>'],
+                        ['number' => '3', 'label' => 'Terms Per Year', 'suffix' => '', 'icon' => '<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>'],
+                        ['number' => '18', 'label' => 'Activities Offered', 'suffix' => '+', 'icon' => '<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>'],
+                        ['number' => '365', 'label' => 'Year-Round Access', 'suffix' => '', 'icon' => '<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>'],
                     ];
                 @endphp
                 @foreach($stats as $stat)
                     <div class="stagger-item text-center">
+                        <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-forest-50 flex items-center justify-center text-forest-700">{!! $stat['icon'] !!}</div>
                         <div class="text-3xl lg:text-4xl font-bold text-forest-900 mb-1">
                             <span class="counter-number" data-target="{{ $stat['number'] }}">0</span>{{ $stat['suffix'] }}
                         </div>
