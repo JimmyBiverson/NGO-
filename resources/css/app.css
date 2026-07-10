@@ -495,9 +495,18 @@
     pointer-events: auto;
 }
 
+.mobile-menu-panel {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-left: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+}
+
 .mobile-nav-link {
     opacity: 0;
     transform: translateX(30px);
+    color: #111827;
 }
 
 /* ============================================

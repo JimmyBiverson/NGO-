@@ -190,7 +190,7 @@
             {{-- Mobile Menu --}}
             <div id="mobile-menu" class="lg:hidden fixed inset-0 z-40 invisible opacity-0">
                 <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="mobile-overlay"></div>
-                <div class="mobile-menu-panel absolute top-0 right-0 w-72 sm:w-80 h-full bg-white shadow-2xl">
+                <div class="mobile-menu-panel absolute top-0 right-0 w-72 sm:w-80 h-full shadow-2xl">
                     <div class="flex flex-col pt-20 px-6">
                         {{-- Mobile language --}}
                         <div class="mb-6 pb-6 border-b border-gray-100">
