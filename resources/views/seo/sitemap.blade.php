@@ -1,3 +1,4 @@
+{{-- Sitemap XML template. Rendered at /sitemap.xml. Lists all public page URLs with priority and change frequency hints for search engines. --}}
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>

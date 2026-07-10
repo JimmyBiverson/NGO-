@@ -28,6 +28,8 @@
 
                 {{-- Main Content --}}
                 <div class="lg:col-span-3">
+                    {{-- Blog post data. Currently static/hardcoded — replace with a dynamic model when the blog is built out.
+                        Each post: title, date, excerpt, image (Unsplash), category. 'Read Full Story' links point to # (placeholder). --}}
                     @php
                         $posts = [
                             [
@@ -78,7 +80,8 @@
                                     </div>
                                     <h3 class="text-lg font-bold text-gray-900 mb-2 leading-snug">{{ $post['title'] }}</h3>
                                     <p class="text-sm text-gray-600 leading-relaxed mb-4">{{ $post['excerpt'] }}</p>
-                                    <a href="#" class="inline-flex items-center gap-1 text-sm font-semibold text-amber-700 hover:text-amber-800 transition-colors">
+                                        {{-- Placeholder: replace '#' with post URL when dynamic routing is added --}}
+                                        <a href="#" class="inline-flex items-center gap-1 text-sm font-semibold text-amber-700 hover:text-amber-800 transition-colors">
                                         Read Full Story: {{ $post['title'] }}
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                                     </a>
@@ -101,6 +104,7 @@
                                     <li>
                                         <a href="#" class="flex items-center justify-between text-sm text-gray-600 hover:text-amber-700 transition-colors py-1.5 px-3 rounded-lg hover:bg-amber-50">
                                             <span>{{ $cat }}</span>
+                                            {{-- Placeholder count — replace with real post-count per category when dynamic blog is built --}}
                                             <span class="text-xs text-gray-400">({{ rand(2, 8) }})</span>
                                         </a>
                                     </li>

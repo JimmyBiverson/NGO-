@@ -9,6 +9,7 @@
     "@@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
+        {{-- FAQPage JSON-LD schema data — each item is a Question/Answer pair for search engine rich results --}}
         @php
             $faqs_schema = [
                 ['q' => 'What is Community First Uganda?', 'a' => 'Community First Uganda is a non-profit organization dedicated to empowering vulnerable and marginalized communities in Uganda through education, healthcare, sports, community services, and livelihood support.'],
@@ -76,6 +77,7 @@
                 @endforeach
             </div>
 
+            {{-- FAQ data with category tags for filtering. Each item: q (question), a (answer), category (general/volunteering/donations/programs) --}}
             @php
                 $faqs = [
                     ['q' => 'What is Community First Uganda?', 'a' => 'Community First Uganda is a non-profit organization dedicated to empowering vulnerable and marginalized communities in Uganda. We focus on education, healthcare, sports, community services, and livelihood support to help individuals and families live holistically improved lives.', 'category' => 'general'],
@@ -118,6 +120,8 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    // FAQ accordion: toggles aria-expanded + max-height for smooth expand/collapse.
+    // Only one item open at a time — closes others on each click.
     var faqQuestions = document.querySelectorAll('.faq-question');
     faqQuestions.forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -125,6 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var icon = this.querySelector('.faq-icon');
             var isOpen = this.getAttribute('aria-expanded') === 'true';
 
+            // Close all other open items
             document.querySelectorAll('.faq-question').forEach(function (other) {
                 if (other !== btn && other.getAttribute('aria-expanded') === 'true') {
                     other.setAttribute('aria-expanded', 'false');
@@ -133,6 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
 
+            // Toggle clicked item
             if (isOpen) {
                 this.setAttribute('aria-expanded', 'false');
                 answer.style.maxHeight = '0';
@@ -145,6 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // Category tab filter: toggles active class on tab button and shows/hides items by data-category
     var tabBtns = document.querySelectorAll('.faq-tab-btn');
     var faqItems = document.querySelectorAll('.faq-item');
     tabBtns.forEach(function (btn) {

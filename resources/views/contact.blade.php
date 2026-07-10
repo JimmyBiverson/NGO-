@@ -22,6 +22,7 @@
     </section>
 
     {{-- Contact Info Cards --}}
+    {{-- 4-card grid: Email, Phone, WhatsApp, Visit. Each has an icon, label, value, and hint text. tilt-card adds 3D hover effect. --}}
     <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 stagger-children">
@@ -190,7 +191,7 @@
                         </div>
                     </div>
 
-                    {{-- Quick Contact --}}
+                    {{-- Quick Contact — prominent WhatsApp CTA in forest-900 dark card --}}
                     <div class="bg-forest-900 rounded-2xl p-8 text-white text-center">
                         <h3 class="font-bold text-lg mb-2">Need Help?</h3>
                         <p class="text-white/70 text-sm mb-4">Chat with us on WhatsApp for quick responses.</p>

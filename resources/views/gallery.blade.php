@@ -37,6 +37,8 @@
 
             {{-- Grid --}}
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children relative" id="gallery-grid">
+                {{-- Gallery images. Each item: src (Unsplash URL), title, desc, date, category (matches filter data-filter values).
+                    data-lightbox triggers the lightbox JS; data-src is the full-res image; data-caption feeds the lightbox caption bar. --}}
                 @php
                     $images = [
                         ['src' => 'https://images.unsplash.com/photo-1588072432833-9640fd5e3d6f?w=800&q=85', 'title' => 'English Language Class', 'desc' => 'Students actively participating in our English language program at the community center', 'date' => 'Term 3, 2024', 'category' => 'education'],
