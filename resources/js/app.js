@@ -9,11 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     // KEN BURNS HERO BACKGROUND + TEXT SLIDES
     // ============================================
+    // Cycles through 4 bg images every 12s with Ken Burns zoom.
+    // Each slide triggers a GSAP timeline: badge → heading → desc → CTA.
+    // Progress bars at bottom sync fill-width with the interval.
     const heroSlides = document.querySelectorAll('.ken-burns-slide');
     const textSlides = document.querySelectorAll('.hero-text-slide');
     const progressBars = document.querySelectorAll('.ken-progress');
     let currentSlide = 0;
-    const slideInterval = 7000;
+    const slideInterval = 12000;
     let slideTimer;
     let progressTimer;
     let floatTween;
@@ -51,22 +54,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 tl.fromTo(badge,
                     { y: -30, opacity: 0, scale: 0.8 },
-                    { y: 0, opacity: 1, scale: 1, duration: 0.6 }
+                    { y: 0, opacity: 1, scale: 1, duration: 0.85 }
                 )
                 .fromTo(heading,
                     { y: 60, opacity: 0, rotateX: 15 },
-                    { y: 0, opacity: 1, rotateX: 0, duration: 0.8 },
-                    '-=0.3'
+                    { y: 0, opacity: 1, rotateX: 0, duration: 1.2 },
+                    '-=0.35'
                 )
                 .fromTo(desc,
                     { x: -40, opacity: 0 },
-                    { x: 0, opacity: 1, duration: 0.7 },
-                    '-=0.4'
+                    { x: 0, opacity: 1, duration: 1.0 },
+                    '-=0.45'
                 )
                 .fromTo(cta,
                     { y: 30, opacity: 0 },
-                    { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 },
-                    '-=0.3'
+                    { y: 0, opacity: 1, duration: 0.9, stagger: 0.15 },
+                    '-=0.4'
                 );
 
                 if (floatTween) floatTween.kill();
@@ -84,8 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 gsap.to([badge, heading, desc], {
                     y: -20,
                     opacity: 0,
-                    duration: 0.3,
-                    ease: 'power2.in',
+                    duration: 0.8,
+                    ease: 'power2.inOut',
                     onComplete: () => {
                         slide.classList.remove('active');
                         slide.style.position = 'absolute';
@@ -104,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resetProgress();
     }
 
+    // Resets and ticks progress bars every 100ms to fill over 12s
     function resetProgress() {
         progressBars.forEach(bar => bar.style.width = '0%');
         let width = 0;
@@ -118,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 100);
     }
 
+    // Advances to the next slide in a circular loop
     function nextSlide() {
         currentSlide = (currentSlide + 1) % heroSlides.length;
         activateSlide(currentSlide);
@@ -134,13 +139,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 s.style.pointerEvents = 'none';
             }
         });
-        activateSlide(0);
-        slideTimer = setInterval(nextSlide, slideInterval);
+        setTimeout(() => {
+            activateSlide(0);
+            slideTimer = setInterval(nextSlide, slideInterval);
+        }, 1000);
     }
 
     // ============================================
-    // HEADER GLASS SCROLL EFFECT (GSAP Scrub)
+    // HEADER FROSTED GLASS SCROLL EFFECT
     // ============================================
+    // Two ScrollTriggers:
+    //   1. Tracks .in-hero state while the hero section is visible.
+    //   2. Adds .scrolled class when scrolled past 60% of hero height (cap 400px),
+    //      triggering the darker glass background in CSS.
     const header = document.getElementById('site-header');
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -150,45 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (header) {
         if (heroSection) {
-            const heroH = heroSection.offsetHeight;
-
-            const headerTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: heroSection,
-                    start: 'top top',
-                    end: () => `+=${heroH}`,
-                    scrub: 0.6,
-                },
-            });
-
-            headerTl
-                .to(header, {
-                    backgroundColor: 'rgba(0,0,0,0.25)',
-                    backdropFilter: 'blur(8px)',
-                    webkitBackdropFilter: 'blur(8px)',
-                    duration: 0.5,
-                })
-                .to(header, {
-                    backgroundColor: 'rgba(255,255,255,0.88)',
-                    backdropFilter: 'blur(20px)',
-                    webkitBackdropFilter: 'blur(20px)',
-                    boxShadow: '0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04)',
-                    duration: 0.5,
-                }, '>')
-                .to('.header-logo', { backgroundColor: '#166534', borderColor: '#bbf7d0', duration: 0.4 }, '>')
-                .to('.header-logo-text', { color: '#ffffff', duration: 0.3 }, '>')
-                .to('.header-site-name', { color: '#111827', duration: 0.3 }, '>')
-                .to('.nav-link', { color: '#4b5563', duration: 0.3 }, '>')
-                .to('.nav-link.nav-link-active', { color: '#166534', backgroundColor: '#f0fdf4', duration: 0.3 }, '>')
-                .to('#mobile-menu-btn', { color: '#374151', duration: 0.3 }, '>')
-                .to('#header-border', {
-                    '--tw-gradient-from': '#f59e0b',
-                    '--tw-gradient-via': '#10b981',
-                    '--tw-gradient-to': '#f59e0b',
-                    opacity: 1,
-                    duration: 0.4,
-                }, '>');
-
             ScrollTrigger.create({
                 trigger: heroSection,
                 start: 'top top',
@@ -198,20 +170,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 onEnterBack: () => { header.classList.add('in-hero'); },
                 onLeaveBack: () => { header.classList.remove('in-hero'); },
             });
+
+            ScrollTrigger.create({
+                trigger: heroSection,
+                start: 'top top',
+                end: `+=${Math.min(heroSection.offsetHeight * 0.6, 400)}`,
+                scrub: 0.4,
+                onUpdate: (self) => {
+                    if (self.progress >= 0.5) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                },
+            });
         } else {
             header.classList.add('scrolled');
-            gsap.set(header, {
-                backgroundColor: 'rgba(255,255,255,0.88)',
-                backdropFilter: 'blur(20px)',
-                webkitBackdropFilter: 'blur(20px)',
-                boxShadow: '0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04)',
-            });
-            gsap.set('.header-logo', { backgroundColor: '#166534', borderColor: '#bbf7d0' });
-            gsap.set('.header-logo-text', { color: '#ffffff' });
-            gsap.set('.header-site-name', { color: '#111827' });
-            gsap.set('.nav-link', { color: '#4b5563' });
-            gsap.set('.nav-link.nav-link-active', { color: '#166534', backgroundColor: '#f0fdf4' });
-            gsap.set('#mobile-menu-btn', { color: '#374151' });
         }
     }
 
@@ -252,10 +226,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             gsap.set(panel, { x: '100%', visibility: 'visible' });
             gsap.set(links, { opacity: 0, x: 30 });
+            gsap.set(mobileOverlay, { opacity: 0 });
 
             menuTween = gsap.timeline();
             menuTween
-                .to(panel, { x: '0%', duration: 0.5, ease: 'power3.out' })
+                .to(mobileOverlay, { opacity: 1, duration: 0.4, ease: 'power2.out' })
+                .to(panel, { x: '0%', duration: 0.5, ease: 'power3.out' }, '-=0.3')
                 .to(links, { x: 0, opacity: 1, duration: 0.4, stagger: 0.06, ease: 'power2.out' }, '-=0.2');
         }
 
@@ -270,6 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
             menuTween
                 .to(links, { x: 30, opacity: 0, duration: 0.2, stagger: 0.02, ease: 'power2.in' })
                 .to(panel, { x: '100%', duration: 0.4, ease: 'power3.in' }, '-=0.1')
+                .to(mobileOverlay, { opacity: 0, duration: 0.3, ease: 'power2.in' }, '-=0.3')
                 .call(() => {
                     mobileMenu.classList.add('invisible', 'opacity-0');
                     mobileMenu.classList.remove('visible');
@@ -469,8 +446,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // SMOOTH SCROLL FOR ANCHOR LINKS
     // ============================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        const href = anchor.getAttribute('href');
+        if (!href || href === '#' || anchor.hasAttribute('data-donate-modal') || anchor.hasAttribute('data-mobile-link') && anchor.getAttribute('href') === '#') {
+            return;
+        }
         anchor.addEventListener('click', (e) => {
-            const target = document.querySelector(anchor.getAttribute('href'));
+            const target = document.querySelector(href);
             if (target) {
                 e.preventDefault();
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -506,18 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ============================================
-    // LANGUAGE SWITCHER
-    // ============================================
-    const langSwitcher = document.getElementById('lang-switcher');
-    if (langSwitcher) {
-        langSwitcher.addEventListener('change', function () {
-            const lang = this.value;
-            const url = new URL(window.location);
-            url.searchParams.set('lang', lang);
-            window.location = url.toString();
-        });
-    }
+    // Language switching disabled - English only
 
     // ============================================
     // DONATION MODAL

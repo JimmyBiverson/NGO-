@@ -22,6 +22,7 @@
     </section>
 
     {{-- Stats --}}
+    {{-- Counter numbers animate via GSAP when scrolled into view. Each has a data-target attribute. --}}
     <section class="py-12 bg-white border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 stagger-children">
@@ -47,6 +48,8 @@
     </section>
 
     {{-- Program Sections --}}
+    {{-- Alternating left/right layout (even index = bg-white, odd = bg-gray-50).
+        Each program card has a card-hover image zoom + tilt-card 3D effect on hover. --}}
     @php
         $programs = [
             [
@@ -164,6 +167,7 @@
     </section>
 
     {{-- Enrollment Process --}}
+    {{-- 3-step numbered process with stagger-children entrance animation. --}}
     <section class="py-16 sm:py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 reveal">

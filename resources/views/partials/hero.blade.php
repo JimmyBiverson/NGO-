@@ -1,10 +1,11 @@
 <section id="hero" class="relative min-h-screen flex items-center overflow-hidden bg-[#0B2B1D]">
 
     {{-- Ken Burns Background Images --}}
+    {{-- 4 slides cycle every 12s (defined in app.js). Each image zooms slowly via CSS animation. --}}
     <div class="ken-burns-container absolute inset-0">
         @php
             $bgImages = [
-                'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=1920&q=80',
+                'https://images.unsplash.com/photo-1523800503107-5bc3ba2a6f81?w=1920&q=80',
                 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1920&q=80',
                 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1920&q=80',
                 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&q=80',
@@ -39,6 +40,7 @@
     <div class="particle-container absolute inset-0 z-[4]"></div>
 
     {{-- Content --}}
+    {{-- Text content overlays matching each bg slide. GSAP timeline drives entrance: badge → heading → desc → CTA. --}}
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-24 pb-20 lg:pt-36 lg:pb-28">
         <div class="max-w-2xl min-h-[320px] relative">
             @php
@@ -112,7 +114,7 @@
         </div>
     </div>
 
-    {{-- Progress bar --}}
+    {{-- Slide progress bar — 4 bars fill in sync with the 12s slide interval --}}
     <div class="absolute bottom-0 left-0 right-0 z-10 flex gap-1 px-4 sm:px-6 lg:px-8 pb-4">
         @foreach($bgImages as $index => $image)
             <div class="flex-1 h-1 bg-white/20 rounded-full overflow-hidden">

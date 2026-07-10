@@ -75,6 +75,8 @@ export function initAnimations() {
     // ============================================
     // SPLIT TEXT REVEAL — targets elements with .split-text
     // ============================================
+    // Splits text into individual <span> characters, then animates them
+    // in with a 3D rotate + stagger effect on scroll.
     function splitText(el) {
         const text = el.innerText;
         el.innerHTML = text.split('').map(char =>
@@ -196,6 +198,7 @@ export function initAnimations() {
     // ============================================
     // IMAGE CLIP REVEAL — images with class .clip-reveal
     // ============================================
+    // Animates from circle(0%) → circle(100%) — a circular wipe reveal
     document.querySelectorAll('.clip-reveal').forEach(el => {
         gsap.set(el, { clipPath: 'circle(0% at 50% 50%)' });
         ScrollTrigger.create({
@@ -215,6 +218,7 @@ export function initAnimations() {
     // ============================================
     // PARALLAX SECTIONS — elements with .parallax-bg
     // ============================================
+    // Moves bg 30% slower than scroll using GSAP scrub
     document.querySelectorAll('.parallax-bg').forEach(el => {
         gsap.to(el, {
             y: '30%',
@@ -231,6 +235,7 @@ export function initAnimations() {
     // ============================================
     // COUNTER ANIMATION with GSAP
     // ============================================
+    // Uses data-target attribute. For values >= 1000, adds locale formatting on completion.
     document.querySelectorAll('.counter-number').forEach(el => {
         const target = parseInt(el.getAttribute('data-target'));
         if (isNaN(target)) return;
@@ -262,6 +267,8 @@ export function initAnimations() {
     // ============================================
     // 3D TILT ON CARDS — .tilt-card
     // ============================================
+    // Calculates rotateX/rotateY based on mouse position relative to card center.
+    // On mouseleave, resets with elastic easing.
     document.querySelectorAll('.tilt-card').forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
@@ -372,6 +379,7 @@ export function initAnimations() {
     // ============================================
     // HERO PARALLAX MOUSE TRACKING
     // ============================================
+    // Subtly moves the bg container opposite to mouse for a depth effect
     const hero = document.getElementById('hero');
     if (hero) {
         const heroBg = hero.querySelector('.ken-burns-container');
@@ -387,6 +395,7 @@ export function initAnimations() {
     // ============================================
     // FLOATING PARTICLES — .particle-container
     // ============================================
+    // Generates 25 small colored dots per container that float upward and fade out
     document.querySelectorAll('.particle-container').forEach(container => {
         const count = 25;
         for (let i = 0; i < count; i++) {

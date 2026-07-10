@@ -27,9 +27,7 @@
     <meta name="twitter:image" content="{{ url('images/og-image.svg') }}">
 
     {{-- hreflang --}}
-    <link rel="alternate" hreflang="en" href="{{ url()->current() }}?lang=en">
-    <link rel="alternate" hreflang="so" href="{{ url()->current() }}?lang=so">
-    <link rel="alternate" hreflang="lg" href="{{ url()->current() }}?lang=lg">
+    <link rel="alternate" hreflang="en" href="{{ url()->current() }}">
     <link rel="alternate" hreflang="x-default" href="{{ url('/') }}">
 
     {{-- Theme & Icons --}}
@@ -130,34 +128,28 @@
                 <div class="flex items-center justify-between h-16 lg:h-20">
 
                     {{-- Logo --}}
+                    {{-- Header transitions from transparent glass (in-hero) to dark glass (scrolled) via ScrollTrigger in app.js --}}
                     <a href="{{ route('home') }}" class="flex items-center gap-3 group">
                         <div class="w-10 h-10 rounded-full bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center text-white font-bold text-lg transition-all duration-500 group-hover:bg-white/25 header-logo">
                             <span class="header-logo-text text-white">CFU</span>
                         </div>
-                        <span class="font-semibold text-lg tracking-tight transition-colors duration-500 header-site-name text-white">{{ __('common.site_name') }}</span>
+                        <span class="font-semibold text-lg tracking-tight transition-colors duration-500 header-site-name text-white">Community First Uganda</span>
                     </a>
 
-                    {{-- Language Switcher --}}
-                    <div class="hidden lg:flex items-center gap-2 mr-2">
-                        <select id="lang-switcher" class="bg-transparent text-white/70 text-xs font-medium border border-white/20 rounded-lg px-2 py-1.5 focus:outline-none focus:border-white/40 transition-colors cursor-pointer">
-                            <option value="en" class="text-gray-900">EN</option>
-                            <option value="so" class="text-gray-900">Soomaali</option>
-                            <option value="lg" class="text-gray-900">Luganda</option>
-                        </select>
-                    </div>
+
 
                     {{-- Desktop Nav --}}
                     <nav class="hidden lg:flex items-center gap-1" aria-label="Main navigation">
                         @php
                             $navItems = [
-                            ['label' => __('common.nav_home'), 'route' => 'home'],
-                            ['label' => __('common.nav_about'), 'route' => 'about'],
-                            ['label' => __('common.nav_programs'), 'route' => 'programs'],
-                            ['label' => __('common.nav_gallery'), 'route' => 'gallery'],
-                            ['label' => __('common.nav_blog'), 'route' => 'blog'],
-                            ['label' => __('common.nav_faq'), 'route' => 'faq'],
-                            ['label' => __('common.nav_volunteer'), 'route' => 'volunteer'],
-                            ['label' => __('common.nav_contact'), 'route' => 'contact'],
+                            ['label' => 'Home', 'route' => 'home'],
+                            ['label' => 'About', 'route' => 'about'],
+                            ['label' => 'Programs', 'route' => 'programs'],
+                            ['label' => 'Gallery', 'route' => 'gallery'],
+                            ['label' => 'Blog', 'route' => 'blog'],
+                            ['label' => 'FAQ', 'route' => 'faq'],
+                            ['label' => 'Volunteer', 'route' => 'volunteer'],
+                            ['label' => 'Contact', 'route' => 'contact'],
                             ];
                         @endphp
                         @foreach($navItems as $item)
@@ -170,7 +162,7 @@
                         @endforeach
                         <a href="#" data-donate-modal
                            class="ml-3 magnetic-btn donate-btn inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-full text-white transition-all duration-300 shadow-lg shadow-amber-500/25 donate-btn-glow">
-                            <span>{{ __('common.donate') }}</span>
+                            <span>Donate</span>
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                         </a>
                     </nav>
@@ -190,32 +182,31 @@
             {{-- Mobile Menu --}}
             <div id="mobile-menu" class="lg:hidden fixed inset-0 z-40 invisible opacity-0">
                 <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="mobile-overlay"></div>
-                <div class="mobile-menu-panel absolute top-0 right-0 w-72 sm:w-80 h-full shadow-2xl">
-                    <button id="mobile-menu-close" type="button" class="absolute top-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/50 bg-white/70 text-gray-800 shadow-lg shadow-black/10 backdrop-blur transition hover:bg-white/90" aria-label="Close menu">
-                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                    <div class="flex flex-col pt-20 px-6">
-                        {{-- Mobile language --}}
-                        <div class="mb-6 pb-6 border-b border-gray-100">
-                            <select id="lang-switcher-mobile" class="w-full bg-gray-50 text-gray-700 text-sm font-medium border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-forest-500 transition-colors cursor-pointer">
-                                <option value="en">English</option>
-                                <option value="so">Soomaali</option>
-                                <option value="lg">Luganda</option>
-                            </select>
-                        </div>
-                        @foreach($navItems as $item)
-                            <a href="{{ route($item['route']) }}" data-mobile-link
-                               class="mobile-nav-link py-3 text-lg font-medium text-gray-800 border-b border-gray-100 transition-colors hover:text-amber-600 {{ request()->routeIs($item['route']) ? 'text-amber-600' : '' }}">
-                                {{ $item['label'] }}
+                <div class="mobile-menu-panel absolute top-0 right-0 w-72 sm:w-80 h-full shadow-2xl flex flex-col justify-between">
+                    <div>
+                        <button id="mobile-menu-close" type="button" class="absolute top-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white/80 shadow-lg shadow-black/10 backdrop-blur transition hover:bg-white/20 hover:text-white cursor-pointer" aria-label="Close menu">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                        <div class="flex flex-col pt-20 px-6 space-y-1">
+                            @foreach($navItems as $item)
+                                <a href="{{ route($item['route']) }}" data-mobile-link
+                                   class="mobile-nav-link py-3 px-4 text-base font-medium rounded-xl border-b border-white/5 transition-all duration-300 flex items-center justify-between {{ request()->routeIs($item['route']) ? 'text-amber-400 bg-white/10 font-semibold' : 'text-white/80 hover:text-white hover:bg-white/5' }}">
+                                    <span>{{ $item['label'] }}</span>
+                                    <svg class="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                                </a>
+                            @endforeach
+                            <a href="#" data-donate-modal data-mobile-link
+                               class="mobile-nav-link mt-6 inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-semibold rounded-full text-white transition-all duration-300 donate-btn donate-btn-glow shadow-lg">
+                                <span>Donate</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                             </a>
-                        @endforeach
-                        <a href="#" data-donate-modal data-mobile-link
-                           class="mobile-nav-link mt-6 inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-semibold rounded-full text-white transition-all duration-300 donate-btn shadow-lg">
-                            <span>{{ __('common.donate') }}</span>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                        </a>
+                        </div>
+                    </div>
+                    {{-- Small Footer inside Menu --}}
+                    <div class="px-6 pb-8 text-center">
+                        <p class="text-xs text-white/40 tracking-wider uppercase font-semibold">&copy; {{ date('Y') }} CFU</p>
                     </div>
                 </div>
             </div>
@@ -243,8 +234,8 @@
                     <div class="w-16 h-16 rounded-full bg-amber-50 flex items-center justify-center mx-auto mb-4">
                         <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-2">{{ __('common.donate_title') }}</h3>
-                    <p class="text-gray-600 text-sm">{{ __('common.donate_subtitle') }}</p>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Support Our Mission</h3>
+                    <p class="text-gray-600 text-sm">Your contribution empowers communities across Uganda.</p>
                 </div>
 
                 <div class="space-y-4">
@@ -299,16 +290,16 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-12">
                     <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
                         <div>
-                            <h3 class="text-lg font-bold text-white">{{ __('common.newsletter_title') }}</h3>
-                            <p class="text-white/60 text-sm">{{ __('common.footer_tagline') }}</p>
+                            <h3 class="text-lg font-bold text-white">Stay Connected</h3>
+                            <p class="text-white/60 text-sm">Engaging and empowering vulnerable communities to live holistically improved lives.</p>
                         </div>
                         <form id="newsletter-form" class="flex w-full lg:w-auto gap-3">
                             @csrf
-                            <input type="email" placeholder="{{ __('common.newsletter_placeholder') }}" required
+                            <input type="email" placeholder="Enter your email" required
                                    class="flex-1 lg:w-72 px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 text-sm focus:outline-none focus:border-amber-400/50 focus:bg-white/15 transition-all">
                             <button type="submit"
                                     class="newsletter-btn px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-semibold text-sm transition-all cursor-pointer">
-                                    {{ __('common.newsletter_btn') }}
+                                    Subscribe
                                 </button>
                         </form>
                         <div id="newsletter-success" class="hidden text-center lg:text-right">
@@ -328,10 +319,10 @@
                     <div class="lg:col-span-4">
                         <div class="flex items-center gap-3 mb-4">
                             <div class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center text-white font-bold">CFU</div>
-                            <span class="font-semibold text-lg">{{ __('common.site_name') }}</span>
+                            <span class="font-semibold text-lg">Community First Uganda</span>
                         </div>
                         <p class="text-white/70 text-sm leading-relaxed mb-6 max-w-sm">
-                            {{ __('common.footer_tagline') }}
+                            Engaging and empowering vulnerable communities to live holistically improved lives.
                         </p>
                         <div class="flex items-center gap-3">
                             <a href="https://x.com/cofi_ug" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-amber-500 hover:text-white transition-all duration-300" aria-label="X (Twitter)">
@@ -348,16 +339,16 @@
 
                     {{-- Quick Links --}}
                     <div class="lg:col-span-2">
-                        <h3 class="text-sm font-semibold uppercase tracking-wider text-amber-400 mb-5">{{ __('common.footer_links') }}</h3>
+                        <h3 class="text-sm font-semibold uppercase tracking-wider text-amber-400 mb-5">Quick Links</h3>
                         <ul class="space-y-3">
-                            <li><a href="{{ route('home') }}" class="text-white/70 hover:text-white transition-colors text-sm">{{ __('common.nav_home') }}</a></li>
-                            <li><a href="{{ route('about') }}" class="text-white/70 hover:text-white transition-colors text-sm">{{ __('common.nav_about') }}</a></li>
-                            <li><a href="{{ route('programs') }}" class="text-white/70 hover:text-white transition-colors text-sm">{{ __('common.nav_programs') }}</a></li>
-                            <li><a href="{{ route('blog') }}" class="text-white/70 hover:text-white transition-colors text-sm">{{ __('common.nav_blog') }}</a></li>
-                            <li><a href="{{ route('faq') }}" class="text-white/70 hover:text-white transition-colors text-sm">{{ __('common.nav_faq') }}</a></li>
-                            <li><a href="{{ route('volunteer') }}" class="text-white/70 hover:text-white transition-colors text-sm">{{ __('common.nav_volunteer') }}</a></li>
-                            <li><a href="{{ route('gallery') }}" class="text-white/70 hover:text-white transition-colors text-sm">{{ __('common.nav_gallery') }}</a></li>
-                            <li><a href="{{ route('contact') }}" class="text-white/70 hover:text-white transition-colors text-sm">{{ __('common.nav_contact') }}</a></li>
+                            <li><a href="{{ route('home') }}" class="text-white/70 hover:text-white transition-colors text-sm">Home</a></li>
+                            <li><a href="{{ route('about') }}" class="text-white/70 hover:text-white transition-colors text-sm">About</a></li>
+                            <li><a href="{{ route('programs') }}" class="text-white/70 hover:text-white transition-colors text-sm">Programs</a></li>
+                            <li><a href="{{ route('blog') }}" class="text-white/70 hover:text-white transition-colors text-sm">Blog</a></li>
+                            <li><a href="{{ route('faq') }}" class="text-white/70 hover:text-white transition-colors text-sm">FAQ</a></li>
+                            <li><a href="{{ route('volunteer') }}" class="text-white/70 hover:text-white transition-colors text-sm">Volunteer</a></li>
+                            <li><a href="{{ route('gallery') }}" class="text-white/70 hover:text-white transition-colors text-sm">Gallery</a></li>
+                            <li><a href="{{ route('contact') }}" class="text-white/70 hover:text-white transition-colors text-sm">Contact</a></li>
                         </ul>
                     </div>
 
@@ -374,7 +365,7 @@
 
                     {{-- Contact Info --}}
                     <div class="lg:col-span-3">
-                        <h3 class="text-sm font-semibold uppercase tracking-wider text-amber-400 mb-5">{{ __('common.footer_contact') }}</h3>
+                        <h3 class="text-sm font-semibold uppercase tracking-wider text-amber-400 mb-5">Contact Us</h3>
                         <ul class="space-y-4">
                             <li class="flex items-start gap-3">
                                 <svg class="w-5 h-5 text-amber-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -401,7 +392,7 @@
             {{-- Bottom Bar --}}
             <div class="border-t border-white/10">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-                    <p class="text-white/50 text-xs">&copy; {{ date('Y') }} {{ __('common.site_name') }}. {{ __('common.rights') }}</p>
+                    <p class="text-white/50 text-xs">&copy; {{ date('Y') }} Community First Uganda. All rights reserved.</p>
                     <div class="flex items-center gap-4 text-xs">
                         <a href="#" class="text-white/50 hover:text-white transition-colors">Privacy Policy</a>
                         <span class="text-white/20">|</span>

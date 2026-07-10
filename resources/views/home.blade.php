@@ -8,6 +8,7 @@
     @include('partials.hero')
 
     {{-- Mission & Vision --}}
+    {{-- Reveal-left/right: GSAP scroll-triggered animations. clip-reveal on image triggers circle-wipe. --}}
     <section class="relative py-16 sm:py-20 lg:py-28 bg-white overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
@@ -41,7 +42,7 @@
                 <div class="reveal-right">
                     <div class="relative">
                         <div class="rounded-2xl overflow-hidden shadow-xl">
-                            <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=85"
+                            <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=800&q=85"
                                  alt="Community First Uganda"
                                  loading="lazy"
                                  class="w-full h-[400px] lg:h-[500px] object-cover clip-reveal"
@@ -61,6 +62,7 @@
     </section>
 
     {{-- Impact Stats --}}
+    {{-- Counter numbers animate via GSAP ScrollTrigger when they enter the viewport. --}}
     <section class="relative py-16 sm:py-20 bg-forest-900 text-white noise-overlay">
         <div class="particle-container absolute inset-0 z-0"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -112,7 +114,7 @@
                         [
                             'title' => 'Literacy & Development',
                             'count' => '3 Activities',
-                            'image' => 'https://images.unsplash.com/photo-1588072432833-9640fd5e3d6f?w=800&q=85',
+                            'image' => 'https://images.unsplash.com/photo-1492538368677-f6e0afe31dcc?w=800&q=85',
                             'description' => 'Empowering minds through language mastery, children\'s education, and digital literacy for comprehensive learning foundation.',
                             'tags' => ['Language Classes', 'Children Classes', 'Computer Classes'],
                             'anchor' => 'literacy'
@@ -186,12 +188,13 @@
     </section>
 
     {{-- Community Center --}}
+    {{-- Grid layout with icon feature list. tilt-card for the 3D hover effect on feature icons. --}}
     <section class="relative py-16 sm:py-20 lg:py-28 bg-white overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <div class="reveal-left relative">
                     <div class="relative rounded-2xl overflow-hidden shadow-xl">
-                        <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=85"
+                        <img src="https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=800&q=85"
                              alt="Community Center"
                              loading="lazy"
                              class="w-full h-[400px] lg:h-[500px] object-cover clip-reveal"
@@ -236,6 +239,7 @@
     </section>
 
     {{-- Testimonials Carousel --}}
+    {{-- Single testimonial block with gold quote icon. Color theme: amber on forest-900. --}}
     <section class="relative py-20 lg:py-28 overflow-hidden bg-forest-900 noise-overlay">
         <div class="particle-container absolute inset-0 z-0"></div>
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
@@ -257,6 +261,7 @@
     </section>
 
     {{-- Partners / Supporters --}}
+    {{-- Infinite horizontal scroll via CSS @keyframes partner-scroll. Duplicated track for seamless loop. --}}
     <section class="py-16 sm:py-20 bg-white overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 reveal">
@@ -305,6 +310,7 @@
     </section>
 
     {{-- CTA Section --}}
+    {{-- Full-width gradient banner with particle background. Uses magnetic-btn for mouse-follow effect. --}}
     <section class="relative py-20 lg:py-28 overflow-hidden noise-overlay">
         <div class="absolute inset-0 bg-gradient-to-br from-forest-900 via-forest-800 to-[#0B2B1D]"></div>
         <div class="particle-container absolute inset-0 z-0"></div>

@@ -8,7 +8,7 @@
     {{-- Page Hero --}}
     <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 bg-forest-900 overflow-hidden">
         <div class="particle-container absolute inset-0 z-0"></div>
-        <div class="absolute inset-0 z-[1] bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=1920&q=85');"></div>
+        <div class="absolute inset-0 z-[1] bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=1920&q=85');"></div>
         <div class="absolute inset-0 opacity-10 noise-overlay"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <span class="inline-block text-xs font-semibold uppercase tracking-widest text-amber-400 bg-white/10 px-4 py-1.5 rounded-full mb-4 reveal">Indigenous NGO Since 2020</span>
@@ -36,6 +36,7 @@
     </section>
 
     {{-- Our Story --}}
+    {{-- Two-column layout: text left, image right with clip-reveal circle animation on scroll. --}}
     <section class="py-16 sm:py-20 lg:py-28 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -51,7 +52,7 @@
                 <div class="reveal-right">
                     <div class="relative">
                         <div class="rounded-2xl overflow-hidden shadow-xl">
-                            <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=800&q=85"
+                            <img src="https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=800&q=85"
                                  alt="Our Story"
                                  loading="lazy"
                                  class="w-full h-[450px] object-cover clip-reveal"
@@ -65,6 +66,7 @@
     </section>
 
     {{-- Approach --}}
+    {{-- 4-card grid with staggered entrance and 3D tilt effect (handled by .tilt-card in animations.js). --}}
     <section class="py-16 sm:py-20 lg:py-28 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-14 reveal">
@@ -174,6 +176,7 @@
     </section>
 
     {{-- Registration --}}
+    {{-- Highlights legal status as registered Ugandan NGO. Two-card grid with icon highlights. --}}
     <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="reveal bg-white rounded-2xl p-8 lg:p-12 shadow-sm border border-gray-100">

@@ -26,6 +26,7 @@
     </section>
 
     {{-- Why Volunteer --}}
+    {{-- Benefits list with checkmark icons. Image uses clip-reveal circle animation. --}}
     <section class="py-16 sm:py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -56,7 +57,7 @@
                 </div>
                 <div class="reveal-right">
                     <div class="relative rounded-2xl overflow-hidden shadow-xl">
-                        <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=85"
+                        <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=800&q=85"
                              alt="Volunteer"
                              loading="lazy"
                              class="w-full h-[400px] object-cover clip-reveal"
@@ -165,7 +166,7 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="reveal bg-forest-50 rounded-2xl p-8 lg:p-12 text-center">
                 <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4 shadow-md ring-2 ring-white">
-                    <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?w=150&q=85&fit=crop&crop=face"
+                    <img src="https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=150&q=85&fit=crop&crop=face"
                          alt="Sarah, Education Volunteer"
                          loading="lazy"
                          class="w-full h-full object-cover"
@@ -180,6 +181,7 @@
     </section>
 
     {{-- Application Form --}}
+    {{-- Client-side validation via form[data-validate]. POST to route('volunteer.submit'). --}}
     <section id="apply" class="py-16 sm:py-20 lg:py-24 bg-gray-50">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 reveal">
