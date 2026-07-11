@@ -41,7 +41,7 @@
     {{-- Page Hero --}}
     <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 bg-forest-900 overflow-hidden">
         <div class="particle-container absolute inset-0 z-0"></div>
-        <div class="absolute inset-0 z-[1] bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&q=85');"></div>
+        <div class="absolute inset-0 z-[1] bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&q=85&fm=webp');"></div>
         <div class="absolute inset-0 opacity-10 noise-overlay"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <span class="inline-block text-xs font-semibold uppercase tracking-widest text-amber-400 bg-white/10 px-4 py-1.5 rounded-full mb-4 reveal">Got Questions?</span>
@@ -63,7 +63,7 @@
                 $categories = ['General', 'Volunteering', 'Donations', 'Programs'];
             @endphp
             <div class="flex flex-wrap justify-center gap-2 mb-12 reveal">
-                <button class="faq-tab-btn active px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 bg-gray-200 text-gray-700 hover:bg-gray-300" data-tab="all">All</button>
+                <button class="faq-tab-btn active px-3 py-2 sm:px-5 sm:py-2.5 rounded-full text-sm font-medium transition-all duration-300 bg-gray-200 text-gray-700 hover:bg-gray-300" data-tab="all">All</button>
                 @foreach($categories as $cat)
                     @php
                         $icon = match(strtolower($cat)) {

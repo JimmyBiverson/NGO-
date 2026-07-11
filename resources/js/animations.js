@@ -239,24 +239,19 @@ export function initAnimations() {
     document.querySelectorAll('.counter-number').forEach(el => {
         const target = parseInt(el.getAttribute('data-target'));
         if (isNaN(target)) return;
+        const obj = { val: 0 };
         ScrollTrigger.create({
             trigger: el,
             start: 'top 85%',
             onEnter: () => {
-                gsap.from(el, {
-                    textContent: 0,
-                    duration: 2,
-                    ease: 'power2.out',
-                    snap: { textContent: 1 },
-                    modifiers: {
-                        textContent: (val) => Math.round(parseFloat(val)).toString(),
-                    },
-                    onComplete: () => {
-                        if (target >= 1000) {
-                            el.textContent = target.toLocaleString();
-                        } else {
-                            el.textContent = target;
-                        }
+                gsap.to(obj, {
+                    val: target,
+                    duration: 2.5,
+                    ease: 'power3.out',
+                    delay: 0.3,
+                    onUpdate: () => {
+                        const v = Math.round(obj.val);
+                        el.textContent = v >= 1000 ? v.toLocaleString() : v;
                     },
                 });
             },

@@ -40,7 +40,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://images.unsplash.com">
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=1920&q=80&fm=webp" fetchpriority="high">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -225,59 +227,205 @@
         {{-- Donation Modal --}}
         <div id="donate-modal" class="fixed inset-0 z-[200] flex items-center justify-center invisible opacity-0 transition-all duration-300">
             <div id="donate-overlay" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
-            <div class="relative bg-white rounded-3xl p-8 lg:p-10 max-w-lg w-full mx-4 shadow-2xl scale-90 transition-all duration-300">
+            <div class="relative bg-white rounded-3xl p-5 sm:p-8 lg:p-10 max-w-lg w-full mx-4 shadow-2xl scale-90 transition-all duration-300 max-h-[90vh] overflow-y-auto">
                 <button id="donate-close" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors cursor-pointer">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
 
-                <div class="text-center mb-8">
-                    <div class="w-16 h-16 rounded-full bg-amber-50 flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                {{-- Step 1: Choose Method --}}
+                <div id="donate-step-1" class="donate-step active">
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 rounded-full bg-amber-50 flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Support Our Mission</h3>
+                        <p class="text-gray-600 text-sm">Your contribution empowers communities across Uganda.</p>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Support Our Mission</h3>
-                    <p class="text-gray-600 text-sm">Your contribution empowers communities across Uganda.</p>
+
+                    <div class="space-y-4">
+                        <a href="https://dashboard.flutterwave.com/donate/bag8zq0soq1c" target="_blank" rel="noopener noreferrer"
+                           class="flex items-center gap-4 p-4 rounded-2xl border-2 border-amber-100 hover:border-amber-400 bg-amber-50/50 hover:bg-amber-50 transition-all duration-300 group">
+                            <div class="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-amber-600 group-hover:scale-110 transition-transform">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-semibold text-gray-900">Credit / Debit Card</div>
+                                <div class="text-xs text-gray-500">Visa, Mastercard, Flutterwave</div>
+                            </div>
+                            <svg class="w-5 h-5 text-gray-400 group-hover:text-amber-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </a>
+
+                        <button type="button" data-donate-goto="2"
+                           class="w-full flex items-center gap-4 p-4 rounded-2xl border-2 border-green-100 hover:border-green-400 bg-green-50/50 hover:bg-green-50 transition-all duration-300 group cursor-pointer">
+                            <div class="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-green-600 group-hover:scale-110 transition-transform">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                            </div>
+                            <div class="flex-1 text-left">
+                                <div class="font-semibold text-gray-900">Mobile Money</div>
+                                <div class="text-xs text-gray-500">MTN MoMo / Airtel Money (UGX)</div>
+                            </div>
+                            <svg class="w-5 h-5 text-gray-400 group-hover:text-green-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="space-y-4">
-                    <a href="https://dashboard.flutterwave.com/donate/bag8zq0soq1c" target="_blank" rel="noopener noreferrer"
-                       class="flex items-center gap-4 p-4 rounded-2xl border-2 border-amber-100 hover:border-amber-400 bg-amber-50/50 hover:bg-amber-50 transition-all duration-300 group">
-                        <div class="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-amber-600 group-hover:scale-110 transition-transform">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                {{-- Step 2: Choose Mobile Money Provider --}}
+                <div id="donate-step-2" class="donate-step hidden">
+                    <button type="button" data-donate-goto="1" class="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-700 mb-6 cursor-pointer">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                        Back
+                    </button>
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
                         </div>
-                        <div class="flex-1">
-                            <div class="font-semibold text-gray-900">Credit / Debit Card</div>
-                            <div class="text-xs text-gray-500">Visa, Mastercard, Flutterwave</div>
-                        </div>
-                        <svg class="w-5 h-5 text-gray-400 group-hover:text-amber-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                    </a>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Choose Provider</h3>
+                        <p class="text-gray-600 text-sm">Select your mobile money provider to continue.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <button type="button" data-donate-provider="mtn" data-donate-goto="3"
+                           class="w-full flex items-center gap-4 p-4 rounded-2xl border-2 border-yellow-100 hover:border-yellow-400 bg-yellow-50/50 hover:bg-yellow-50 transition-all duration-300 group cursor-pointer">
+                            <div class="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center font-bold text-yellow-600 text-xs group-hover:scale-110 transition-transform">MTN</div>
+                            <div class="flex-1 text-left">
+                                <div class="font-semibold text-gray-900">MTN Mobile Money</div>
+                                <div class="text-xs text-gray-500">Dial *165# to pay</div>
+                            </div>
+                            <svg class="w-5 h-5 text-gray-400 group-hover:text-yellow-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                        <button type="button" data-donate-provider="airtel" data-donate-goto="3"
+                           class="w-full flex items-center gap-4 p-4 rounded-2xl border-2 border-red-100 hover:border-red-400 bg-red-50/50 hover:bg-red-50 transition-all duration-300 group cursor-pointer">
+                            <div class="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center font-bold text-red-600 text-xs group-hover:scale-110 transition-transform">Airtel</div>
+                            <div class="flex-1 text-left">
+                                <div class="font-semibold text-gray-900">Airtel Money</div>
+                                <div class="text-xs text-gray-500">Dial *185# to pay</div>
+                            </div>
+                            <svg class="w-5 h-5 text-gray-400 group-hover:text-red-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </div>
 
-                    <div class="flex items-center gap-4 p-4 rounded-2xl border-2 border-green-100 hover:border-green-400 bg-green-50/50 hover:bg-green-50 transition-all duration-300 group cursor-pointer" onclick="window.open('https://wa.me/256393249878?text=I%20want%20to%20donate%20via%20Mobile%20Money', '_blank')">
-                        <div class="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-green-600 group-hover:scale-110 transition-transform">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                        </div>
-                        <div class="flex-1">
-                            <div class="font-semibold text-gray-900">Mobile Money</div>
-                            <div class="text-xs text-gray-500">MTN MoMo / Airtel Money (UGX)</div>
-                        </div>
-                        <svg class="w-5 h-5 text-gray-400 group-hover:text-green-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                {{-- Step 3: Payment Instructions + Reference --}}
+                <div id="donate-step-3" class="donate-step hidden">
+                    <button type="button" data-donate-goto="2" class="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-700 mb-4 cursor-pointer">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                        Back
+                    </button>
+                    <div class="text-center mb-4">
+                        <div id="donate-provider-icon" class="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3 font-bold text-base"></div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-1">Pay via <span id="donate-provider-name"></span></h3>
+                        <p class="text-gray-500 text-xs">Follow these steps, then enter your reference below.</p>
                     </div>
 
-                    <div class="mt-6 pt-6 border-t border-gray-100">
-                        <div class="text-center">
-                            <p class="text-xs text-gray-500 mb-3">Or send via Mobile Money directly:</p>
-                            <div class="grid grid-cols-2 gap-3">
-                                <div class="p-3 rounded-xl bg-yellow-50 border border-yellow-100">
-                                    <div class="text-xs font-bold text-yellow-700 mb-1">MTN MoMo</div>
-                                    <div class="text-sm font-mono font-bold text-gray-900">+256 393 249 878</div>
+                    {{-- Payment Instructions --}}
+                    <div id="donate-instructions" class="bg-gray-50 rounded-xl p-4 mb-4">
+                        <ol class="space-y-2.5 text-sm text-gray-700">
+                            <li class="flex gap-2.5">
+                                <span class="w-5 h-5 rounded-full bg-forest-900 text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+                                <span>Dial <strong id="donate-ussd-code" class="text-forest-700"></strong> and select <strong>Pay Business</strong></span>
+                            </li>
+                            <li class="flex gap-2.5">
+                                <span class="w-5 h-5 rounded-full bg-forest-900 text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+                                <span>Enter Business: <strong class="text-forest-700">Community First Uganda</strong>, then the amount</span>
+                            </li>
+                            <li class="flex gap-2.5">
+                                <span class="w-5 h-5 rounded-full bg-forest-900 text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
+                                <span>Enter your PIN to confirm. You'll receive an SMS with a <strong>reference number</strong>.</span>
+                            </li>
+                        </ol>
+                    </div>
+
+                    {{-- Payment Form --}}
+                    <form id="donate-momo-form" class="space-y-4">
+                        <div>
+                            <label for="donor-name" class="block text-sm font-medium text-gray-700 mb-1.5">Your Name</label>
+                            <input type="text" id="donor-name" name="donor_name" required placeholder="e.g. John Doe"
+                                   class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-forest-500/30 focus:border-forest-500">
+                        </div>
+                        <div>
+                            <label for="donor-phone" class="block text-sm font-medium text-gray-700 mb-1.5">Phone Number (used for MoMo)</label>
+                            <input type="tel" id="donor-phone" name="donor_phone" required placeholder="e.g. +256 700 123 456"
+                                   class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-forest-500/30 focus:border-forest-500">
+                        </div>
+                        <div>
+                            <label for="donor-amount" class="block text-sm font-medium text-gray-700 mb-1.5">Amount (UGX)</label>
+                            <input type="number" id="donor-amount" name="amount" required min="1000" step="100" placeholder="e.g. 50000"
+                                   class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-forest-500/30 focus:border-forest-500">
+                        </div>
+                        <div>
+                            <label for="donor-reference" class="block text-sm font-medium text-gray-700 mb-1.5">Transaction Reference Number</label>
+                            <input type="text" id="donor-reference" name="reference" required placeholder="From your SMS confirmation"
+                                   class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-forest-500/30 focus:border-forest-500">
+                            <p class="text-xs text-gray-400 mt-1">Check your SMS for the transaction reference after paying.</p>
+                        </div>
+                        <button type="submit" id="donate-confirm-btn"
+                           class="w-full py-3.5 rounded-xl bg-forest-900 hover:bg-forest-800 text-white font-semibold text-sm transition-all duration-300 cursor-pointer">
+                            Confirm Payment
+                        </button>
+                    </form>
+                </div>
+
+                {{-- Step 4: Receipt --}}
+                <div id="donate-step-4" class="donate-step hidden">
+                    <div id="donate-receipt" class="text-center">
+                        <div class="w-20 h-20 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-1">Thank You!</h3>
+                        <p class="text-gray-600 text-sm mb-6">Your payment confirmation is below.</p>
+
+                        <div class="bg-gray-50 rounded-2xl p-6 text-left mb-6">
+                            <div class="flex items-center gap-3 mb-4 pb-4 border-b border-gray-200">
+                                <div class="w-10 h-10 rounded-full bg-forest-900 flex items-center justify-center text-white font-bold text-xs">CFU</div>
+                                <div>
+                                    <div class="font-semibold text-gray-900 text-sm">Community First Uganda</div>
+                                    <div class="text-xs text-gray-500">Donation Receipt</div>
                                 </div>
-                                <div class="p-3 rounded-xl bg-red-50 border border-red-100">
-                                    <div class="text-xs font-bold text-red-700 mb-1">Airtel Money</div>
-                                    <div class="text-sm font-mono font-bold text-gray-900">+256 393 249 878</div>
+                            </div>
+                            <div class="space-y-3 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Name</span>
+                                    <span id="receipt-name" class="font-medium text-gray-900"></span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Phone</span>
+                                    <span id="receipt-phone" class="font-medium text-gray-900"></span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Amount</span>
+                                    <span id="receipt-amount" class="font-semibold text-forest-700 text-base"></span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Method</span>
+                                    <span id="receipt-method" class="font-medium text-gray-900"></span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Reference</span>
+                                    <span id="receipt-reference" class="font-medium text-gray-900 font-mono text-xs"></span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Transaction ID</span>
+                                    <span id="receipt-transaction-id" class="font-medium text-gray-900 font-mono text-xs"></span>
+                                </div>
+                                <div class="flex justify-between pt-3 border-t border-gray-200">
+                                    <span class="text-gray-500">Date</span>
+                                    <span id="receipt-date" class="font-medium text-gray-900 text-xs"></span>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="flex gap-3">
+                            <button type="button" id="donate-print-receipt"
+                               class="flex-1 py-3 rounded-xl bg-forest-900 hover:bg-forest-800 text-white font-semibold text-sm transition-all duration-300 cursor-pointer">
+                                Download Receipt
+                            </button>
+                            <button type="button" data-donate-goto="1"
+                               class="flex-1 py-3 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold text-sm transition-all duration-300 cursor-pointer">
+                                New Donation
+                            </button>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
 

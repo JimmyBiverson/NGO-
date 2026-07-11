@@ -8,7 +8,7 @@
     {{-- Page Hero --}}
     <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 bg-forest-900 overflow-hidden">
         <div class="particle-container absolute inset-0 z-0"></div>
-        <div class="absolute inset-0 z-[1] bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&q=85');"></div>
+        <div class="absolute inset-0 z-[1] bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&q=85&fm=webp');"></div>
         <div class="absolute inset-0 opacity-10 noise-overlay"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <span class="inline-block text-xs font-semibold uppercase tracking-widest text-amber-400 bg-white/10 px-4 py-1.5 rounded-full mb-4 reveal">Our Impact in Pictures</span>
@@ -41,15 +41,15 @@
                     data-lightbox triggers the lightbox JS; data-src is the full-res image; data-caption feeds the lightbox caption bar. --}}
                 @php
                     $images = [
-                        ['src' => 'https://images.unsplash.com/photo-1588072432833-9640fd5e3d6f?w=800&q=85', 'title' => 'English Language Class', 'desc' => 'Students actively participating in our English language program at the community center', 'date' => 'Term 3, 2024', 'category' => 'education'],
-                        ['src' => 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=800&q=85', 'title' => 'Computer Skills Training', 'desc' => 'Youth learning essential computer skills for career development and digital literacy', 'date' => 'Term 3, 2024', 'category' => 'education'],
-                        ['src' => 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=85', 'title' => 'Medical Outreach Camp', 'desc' => 'Healthcare professionals providing free medical checkups and health education', 'date' => 'October 2024', 'category' => 'healthcare'],
-                        ['src' => 'https://images.unsplash.com/photo-1431324155629-1a9124e1f9c3?w=800&q=85', 'title' => 'Futsal Tournament', 'desc' => 'Young athletes developing teamwork, leadership, and fitness through organized sports', 'date' => 'November 2024', 'category' => 'sports'],
-                        ['src' => 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=85', 'title' => 'Community Gathering', 'desc' => 'Community members coming together for empowerment workshops and social engagement', 'date' => 'November 2024', 'category' => 'community'],
-                        ['src' => 'https://images.unsplash.com/photo-1559333086-b0a562ed0e6c?w=800&q=85', 'title' => 'Henna Art Workshop', 'desc' => 'Women learning traditional henna art as a cultural skill and income-generating craft', 'date' => 'October 2024', 'category' => 'livelihood'],
-                        ['src' => 'https://images.unsplash.com/photo-1604962914199-fc2467b2b4a3?w=800&q=85', 'title' => 'Tailoring & Fashion', 'desc' => 'Vocational training in tailoring and fashion design for economic empowerment', 'date' => 'Term 2, 2024', 'category' => 'livelihood'],
-                        ['src' => 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=85', 'title' => 'Community Service', 'desc' => 'Volunteers engaging in home welfare visits and community support activities', 'date' => 'September 2024', 'category' => 'community'],
-                        ['src' => 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&q=85', 'title' => 'Aerobics Session', 'desc' => 'Ladies fitness and aerobics sessions promoting physical wellness and social bonding', 'date' => 'Term 3, 2024', 'category' => 'sports'],
+                        ['src' => 'https://images.unsplash.com/photo-1588072432833-9640fd5e3d6f?w=800&q=85&fm=webp', 'title' => 'English Language Class', 'desc' => 'Students actively participating in our English language program at the community center', 'date' => 'Term 3, 2024', 'category' => 'education'],
+                        ['src' => 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=800&q=85&fm=webp', 'title' => 'Computer Skills Training', 'desc' => 'Youth learning essential computer skills for career development and digital literacy', 'date' => 'Term 3, 2024', 'category' => 'education'],
+                        ['src' => 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=85&fm=webp', 'title' => 'Medical Outreach Camp', 'desc' => 'Healthcare professionals providing free medical checkups and health education', 'date' => 'October 2024', 'category' => 'healthcare'],
+                        ['src' => 'https://images.unsplash.com/photo-1431324155629-1a9124e1f9c3?w=800&q=85&fm=webp', 'title' => 'Futsal Tournament', 'desc' => 'Young athletes developing teamwork, leadership, and fitness through organized sports', 'date' => 'November 2024', 'category' => 'sports'],
+                        ['src' => 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=85&fm=webp', 'title' => 'Community Gathering', 'desc' => 'Community members coming together for empowerment workshops and social engagement', 'date' => 'November 2024', 'category' => 'community'],
+                        ['src' => 'https://images.unsplash.com/photo-1559333086-b0a562ed0e6c?w=800&q=85&fm=webp', 'title' => 'Henna Art Workshop', 'desc' => 'Women learning traditional henna art as a cultural skill and income-generating craft', 'date' => 'October 2024', 'category' => 'livelihood'],
+                        ['src' => 'https://images.unsplash.com/photo-1604962914199-fc2467b2b4a3?w=800&q=85&fm=webp', 'title' => 'Tailoring & Fashion', 'desc' => 'Vocational training in tailoring and fashion design for economic empowerment', 'date' => 'Term 2, 2024', 'category' => 'livelihood'],
+                        ['src' => 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=85&fm=webp', 'title' => 'Community Service', 'desc' => 'Volunteers engaging in home welfare visits and community support activities', 'date' => 'September 2024', 'category' => 'community'],
+                        ['src' => 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&q=85&fm=webp', 'title' => 'Aerobics Session', 'desc' => 'Ladies fitness and aerobics sessions promoting physical wellness and social bonding', 'date' => 'Term 3, 2024', 'category' => 'sports'],
                     ];
                 @endphp
 

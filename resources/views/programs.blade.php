@@ -8,7 +8,7 @@
     {{-- Page Hero --}}
     <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 bg-forest-900 overflow-hidden">
         <div class="particle-container absolute inset-0 z-0"></div>
-        <div class="absolute inset-0 z-[1] bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=1920&q=85');"></div>
+        <div class="absolute inset-0 z-[1] bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=1920&q=85&fm=webp');"></div>
         <div class="absolute inset-0 opacity-10 noise-overlay"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <span class="inline-block text-xs font-semibold uppercase tracking-widest text-amber-400 bg-white/10 px-4 py-1.5 rounded-full mb-4 reveal">4 Core Programming Areas</span>
@@ -58,7 +58,7 @@
                 'count' => '50+ Learners per term',
                 'activities' => '3 Core Activities',
                 'description' => 'Foundational education and digital literacy programs empowering minds through language mastery, children\'s education, and essential computer skills for comprehensive learning development.',
-                'image' => 'https://images.unsplash.com/photo-1588072432833-9640fd5e3d6f?w=800&q=85',
+                'image' => 'https://images.unsplash.com/photo-1588072432833-9640fd5e3d6f?w=800&q=85&fm=webp',
                 'items' => ['English Language Classes', 'Children\'s Education & Homework Support', 'Computer & Digital Literacy', 'Swahili & Somali Language Support'],
                 'align' => 'left'
             ],
@@ -68,7 +68,7 @@
                 'count' => '4 Core Activities',
                 'activities' => '4 Activities',
                 'description' => 'Building community bonds through sports, fitness, and social connections that strengthen collective spirit, promote physical wellness, and foster inclusive participation across all community members.',
-                'image' => 'https://images.unsplash.com/photo-1431324155629-1a9124e1f9c3?w=800&q=85',
+                'image' => 'https://images.unsplash.com/photo-1431324155629-1a9124e1f9c3?w=800&q=85&fm=webp',
                 'items' => ['Futsal (Indoor Soccer)', 'Aerobics Sessions (Ladies Fitness)', 'Gym Access & Personal Training', 'Women\'s Social Groups', 'Community Events & Gatherings'],
                 'align' => 'right'
             ],
@@ -78,7 +78,7 @@
                 'count' => '50+ Beneficiaries per term',
                 'activities' => '6 Core Activities',
                 'description' => 'Comprehensive community support providing essential healthcare, legal aid, and psychosocial wellbeing services through partnerships and community-centered care programs for holistic development.',
-                'image' => 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=85',
+                'image' => 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=85&fm=webp',
                 'items' => ['Healthcare Support & Medical Outreach', 'Legal Aid Outreach & Workshops', 'Psychosocial Support & Counseling', 'Trauma Healing Programs', 'Home Welfare Visits', 'Partnership With Hope Speaks Organization'],
                 'align' => 'left'
             ],
@@ -88,7 +88,7 @@
                 'count' => '80+ Entrepreneurs per term',
                 'activities' => '5 Core Activities',
                 'description' => 'Sustainable income generation through practical skills and entrepreneurship development, empowering community members with vocational training and business skills for economic independence and self-reliance.',
-                'image' => 'https://images.unsplash.com/photo-1604962914199-fc2467b2b4a3?w=800&q=85',
+                'image' => 'https://images.unsplash.com/photo-1604962914199-fc2467b2b4a3?w=800&q=85&fm=webp',
                 'items' => ['Crocheting & Handicrafts Training', 'Henna Art & Cultural Skills', 'Tailoring & Fashion Design', 'Liquid Soap Making (Entrepreneurship)', 'Computer Programming Basics', 'Business Development & Financial Literacy'],
                 'align' => 'right'
             ],
@@ -157,7 +157,7 @@
                     <div class="text-sm font-medium text-gray-500 uppercase tracking-wider">Activities</div>
                     <p class="text-xs text-gray-400 mt-2">Diverse learning and skill-building options</p>
                 </div>
-                <div class="stagger-item bg-gray-50 rounded-2xl p-8 text-center card-hover tilt-card sm:col-span-2 lg:col-span-1">
+                <div class="stagger-item bg-gray-50 rounded-2xl p-8 text-center card-hover tilt-card md:col-span-2 lg:col-span-1">
                     <div class="text-4xl font-bold text-forest-900 mb-1">Year-Round</div>
                     <div class="text-sm font-medium text-gray-500 uppercase tracking-wider">Availability</div>
                     <p class="text-xs text-gray-400 mt-2">Flexible enrollment throughout the year</p>

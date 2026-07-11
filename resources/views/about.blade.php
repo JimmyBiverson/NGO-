@@ -8,7 +8,7 @@
     {{-- Page Hero --}}
     <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 bg-forest-900 overflow-hidden">
         <div class="particle-container absolute inset-0 z-0"></div>
-        <div class="absolute inset-0 z-[1] bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=1920&q=85');"></div>
+        <div class="absolute inset-0 z-[1] bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=1920&q=85&fm=webp');"></div>
         <div class="absolute inset-0 opacity-10 noise-overlay"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <span class="inline-block text-xs font-semibold uppercase tracking-widest text-amber-400 bg-white/10 px-4 py-1.5 rounded-full mb-4 reveal">Indigenous NGO Since 2020</span>
@@ -23,7 +23,7 @@
 
     {{-- Quote --}}
     <section class="relative py-16 bg-gray-50 overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center opacity-[0.04]" style="background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1920&q=85');"></div>
+        <div class="absolute inset-0 bg-cover bg-center opacity-[0.04]" style="background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1920&q=85&fm=webp');"></div>
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="relative reveal">
                 <svg class="w-10 h-10 text-amber-300 mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg>
@@ -52,10 +52,10 @@
                 <div class="reveal-right">
                     <div class="relative">
                         <div class="rounded-2xl overflow-hidden shadow-xl">
-                            <img src="https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=800&q=85"
+                            <img src="https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=800&q=85&fm=webp"
                                  alt="Our Story"
                                  loading="lazy"
-                                 class="w-full h-[450px] object-cover clip-reveal"
+                                 class="w-full h-[300px] sm:h-[400px] lg:h-[450px] object-cover clip-reveal"
                                  onerror="this.parentElement.style.backgroundColor='#0B2B1D'; this.style.display='none';">
                         </div>
                         <div class="absolute -bottom-4 -right-4 w-28 h-28 bg-amber-100 rounded-2xl -z-10 hidden lg:block"></div>
@@ -110,7 +110,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto stagger-children">
                 <div class="stagger-item tilt-card bg-white rounded-2xl p-8 lg:p-10 shadow-sm border border-gray-100 card-hover text-center">
                     <div class="w-28 h-28 rounded-full overflow-hidden mx-auto mb-6 shadow-lg ring-2 ring-forest-100">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=85&fit=crop&crop=face"
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=85&fit=crop&crop=face&fm=webp"
                              alt="Philip Onen"
                              loading="lazy"
                              class="w-full h-full object-cover"
@@ -124,7 +124,7 @@
                 </div>
                 <div class="stagger-item tilt-card bg-white rounded-2xl p-8 lg:p-10 shadow-sm border border-gray-100 card-hover text-center">
                     <div class="w-28 h-28 rounded-full overflow-hidden mx-auto mb-6 shadow-lg ring-2 ring-amber-100">
-                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=200&q=85&fit=crop&crop=face"
+                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=200&q=85&fit=crop&crop=face&fm=webp"
                              alt="Community Team"
                              loading="lazy"
                              class="w-full h-full object-cover"
@@ -152,9 +152,9 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 stagger-children">
                 @php
                     $communities = [
-                        ['title' => 'Somali Urban Refugees', 'desc' => 'Our current target community living in the slums of Kampala — including Katanga, Bwaise, and Mengo areas — focusing on establishing felt needs and empowerment.', 'tag' => 'Primary Focus Community', 'image' => 'https://images.unsplash.com/photo-1588072432833-9640fd5e3d6f?w=800&q=85'],
-                        ['title' => 'Vulnerable Families', 'desc' => 'Supporting the most vulnerable families within the Somali and broader community through holistic intervention programs addressing education, health, and economic stability.', 'tag' => 'Multiple Communities', 'image' => 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=85'],
-                        ['title' => 'Women & Youth', 'desc' => 'Empowering Somali women and youth through skills development, leadership training, and income-generating activities including crocheting, henna art, tailoring, and soap making.', 'tag' => 'Key Demographics', 'image' => 'https://images.unsplash.com/photo-1559333086-b0a562ed0e6c?w=800&q=85'],
+                        ['title' => 'Somali Urban Refugees', 'desc' => 'Our current target community living in the slums of Kampala — including Katanga, Bwaise, and Mengo areas — focusing on establishing felt needs and empowerment.', 'tag' => 'Primary Focus Community', 'image' => 'https://images.unsplash.com/photo-1588072432833-9640fd5e3d6f?w=800&q=85&fm=webp'],
+                        ['title' => 'Vulnerable Families', 'desc' => 'Supporting the most vulnerable families within the Somali and broader community through holistic intervention programs addressing education, health, and economic stability.', 'tag' => 'Multiple Communities', 'image' => 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=85&fm=webp'],
+                        ['title' => 'Women & Youth', 'desc' => 'Empowering Somali women and youth through skills development, leadership training, and income-generating activities including crocheting, henna art, tailoring, and soap making.', 'tag' => 'Key Demographics', 'image' => 'https://images.unsplash.com/photo-1559333086-b0a562ed0e6c?w=800&q=85&fm=webp'],
                     ];
                 @endphp
 

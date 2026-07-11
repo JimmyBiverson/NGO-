@@ -1,14 +1,14 @@
-<section id="hero" class="relative min-h-screen flex items-center overflow-hidden bg-[#0B2B1D]">
+<section id="hero" class="relative min-h-[100dvh] flex items-center overflow-hidden bg-[#0B2B1D]">
 
     {{-- Ken Burns Background Images --}}
     {{-- 4 slides cycle every 12s (defined in app.js). Each image zooms slowly via CSS animation. --}}
     <div class="ken-burns-container absolute inset-0">
         @php
             $bgImages = [
-                'https://images.unsplash.com/photo-1523800503107-5bc3ba2a6f81?w=1920&q=80',
-                'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1920&q=80',
-                'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1920&q=80',
-                'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&q=80',
+                'https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=1920&q=80&fm=webp',
+                'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1920&q=80&fm=webp',
+                'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1920&q=80&fm=webp',
+                'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&q=80&fm=webp',
             ];
         @endphp
         @foreach($bgImages as $index => $image)
@@ -42,7 +42,7 @@
     {{-- Content --}}
     {{-- Text content overlays matching each bg slide. GSAP timeline drives entrance: badge → heading → desc → CTA. --}}
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-24 pb-20 lg:pt-36 lg:pb-28">
-        <div class="max-w-2xl min-h-[320px] relative">
+        <div class="max-w-2xl min-h-[200px] sm:min-h-[320px] relative">
             @php
                 $textSlides = [
                     [
@@ -87,17 +87,17 @@
 
             <div data-slide-element="cta" class="hero-reveal flex flex-wrap items-center gap-4 mt-4">
                 <a href="{{ route('volunteer') }}"
-                   class="magnetic-btn group inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-white font-semibold text-sm transition-all duration-300 shadow-xl shadow-amber-500/30 hover:shadow-amber-500/50 hero-cta-primary">
+                   class="magnetic-btn group inline-flex items-center gap-2 px-5 py-3 sm:px-7 sm:py-3.5 rounded-full text-white font-semibold text-sm transition-all duration-300 shadow-xl shadow-amber-500/30 hover:shadow-amber-500/50 hero-cta-primary">
                     <span>Volunteer With Us</span>
                     <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                 </a>
                 <a href="{{ route('programs') }}"
-                   class="magnetic-btn group inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-white font-semibold text-sm border-2 border-white/30 transition-all duration-300 hover:bg-white/10 hover:border-white/50">
+                   class="magnetic-btn group inline-flex items-center gap-2 px-5 py-3 sm:px-7 sm:py-3.5 rounded-full text-white font-semibold text-sm border-2 border-white/30 transition-all duration-300 hover:bg-white/10 hover:border-white/50">
                     <span>Our Programs</span>
                     <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 </a>
                 <a href="#" data-donate-modal
-                   class="magnetic-btn group inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-amber-300 font-semibold text-sm border border-amber-400/30 transition-all duration-300 hover:bg-amber-400/10 hover:border-amber-400/60">
+                   class="magnetic-btn group inline-flex items-center gap-2 px-5 py-3 sm:px-7 sm:py-3.5 rounded-full text-amber-300 font-semibold text-sm border border-amber-400/30 transition-all duration-300 hover:bg-amber-400/10 hover:border-amber-400/60">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
                     <span>Donate</span>
                 </a>

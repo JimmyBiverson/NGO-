@@ -8,7 +8,7 @@
     {{-- Page Hero --}}
     <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 bg-forest-900 overflow-hidden">
         <div class="particle-container absolute inset-0 z-0"></div>
-        <div class="absolute inset-0 z-[1] bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1920&q=85');"></div>
+        <div class="absolute inset-0 z-[1] bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1920&q=85&fm=webp');"></div>
         <div class="absolute inset-0 opacity-10 noise-overlay"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <span class="inline-block text-xs font-semibold uppercase tracking-widest text-amber-400 bg-white/10 px-4 py-1.5 rounded-full mb-4 reveal">Get in Touch</span>
@@ -139,15 +139,15 @@
                             Office Hours
                         </h3>
                         <div class="space-y-3 text-sm">
-                            <div class="flex justify-between">
+                            <div class="flex flex-col sm:flex-row sm:justify-between gap-1">
                                 <span class="text-gray-600">Monday - Friday</span>
                                 <span class="font-medium text-gray-900">9:00 AM - 5:00 PM</span>
                             </div>
-                            <div class="flex justify-between">
+                            <div class="flex flex-col sm:flex-row sm:justify-between gap-1">
                                 <span class="text-gray-600">Saturday</span>
                                 <span class="font-medium text-gray-900">10:00 AM - 2:00 PM</span>
                             </div>
-                            <div class="flex justify-between">
+                            <div class="flex flex-col sm:flex-row sm:justify-between gap-1">
                                 <span class="text-gray-600">Sunday</span>
                                 <span class="font-medium text-gray-400">Closed</span>
                             </div>
@@ -166,7 +166,7 @@
                         <p class="text-sm text-gray-600">Noor Emporium, Mengo Hill Road, Kampala, Uganda</p>
                         <p class="text-xs text-gray-400 mt-1">Located near Mengo Hospital, opposite the market</p>
                         <div class="mt-4 rounded-xl overflow-hidden h-48">
-                            <img src="https://images.unsplash.com/photo-1577415124269-fc114e4a84db?w=800&q=85"
+                            <img src="https://images.unsplash.com/photo-1577415124269-fc114e4a84db?w=800&q=85&fm=webp"
                                  alt="Our Location - Kampala"
                                  loading="lazy"
                                  class="w-full h-full object-cover"

@@ -75,12 +75,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (floatTween) floatTween.kill();
 
                 floatTween = gsap.to(heading, {
-                    y: -8,
-                    duration: 2.5,
+                    y: -12,
+                    duration: 3.5,
                     repeat: -1,
                     yoyo: true,
-                    ease: 'sine.inOut',
-                    delay: 1.5,
+                    ease: 'power1.inOut',
+                    delay: 2.2,
                 });
 
             } else if (i === prevIndex && prevIndex !== index) {
@@ -314,10 +314,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors z-10" id="lightbox-close">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
-            <button class="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors z-10" id="lightbox-prev">
+            <button class="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 items-center justify-center text-white hover:bg-white/20 transition-colors z-10 hidden sm:flex" id="lightbox-prev">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
             </button>
-            <button class="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors z-10" id="lightbox-next">
+            <button class="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 items-center justify-center text-white hover:bg-white/20 transition-colors z-10 hidden sm:flex" id="lightbox-next">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             </button>
             <div class="relative flex items-center justify-center p-4 w-full max-w-5xl max-h-[85vh]">
@@ -347,8 +347,9 @@ document.addEventListener('DOMContentLoaded', () => {
             lightboxEl.classList.remove('invisible', 'opacity-0');
             document.body.style.overflow = 'hidden';
 
-            lightboxPrev.style.display = lightboxItems.length > 1 ? 'flex' : 'none';
-            lightboxNext.style.display = lightboxItems.length > 1 ? 'flex' : 'none';
+            const isMobile = window.innerWidth < 640;
+            lightboxPrev.style.display = (!isMobile && lightboxItems.length > 1) ? 'flex' : 'none';
+            lightboxNext.style.display = (!isMobile && lightboxItems.length > 1) ? 'flex' : 'none';
         }
 
         function closeLightbox() {
@@ -447,7 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const href = anchor.getAttribute('href');
-        if (!href || href === '#' || anchor.hasAttribute('data-donate-modal') || anchor.hasAttribute('data-mobile-link') && anchor.getAttribute('href') === '#') {
+        if (!href || href === '#' || anchor.hasAttribute('data-donate-modal') || (anchor.hasAttribute('data-mobile-link') && anchor.getAttribute('href') === '#')) {
             return;
         }
         anchor.addEventListener('click', (e) => {
@@ -500,20 +501,64 @@ document.addEventListener('DOMContentLoaded', () => {
     if (donateModal && donateOverlay) {
         function openDonateModal() {
             donateModal.classList.remove('invisible', 'opacity-0');
-            donateModal.querySelector('div')?.classList.remove('scale-90');
+            donateModal.querySelector('div:last-child')?.classList.remove('scale-90');
             document.body.style.overflow = 'hidden';
+            resetDonateSteps();
         }
 
         function closeDonateModal() {
-            donateModal.querySelector('div')?.classList.add('scale-90');
+            donateModal.querySelector('div:last-child')?.classList.add('scale-90');
             donateModal.classList.add('invisible', 'opacity-0');
             document.body.style.overflow = '';
+        }
+
+        function resetDonateSteps() {
+            document.querySelectorAll('.donate-step').forEach(step => {
+                step.classList.add('hidden');
+            });
+            const step1 = document.getElementById('donate-step-1');
+            if (step1) step1.classList.remove('hidden');
+            document.querySelectorAll('[data-donate-provider]').forEach(b => b.classList.remove('active'));
+            const form = document.getElementById('donate-momo-form');
+            if (form) form.reset();
+        }
+
+        function goToDonateStep(stepNum, provider) {
+            document.querySelectorAll('.donate-step').forEach(s => s.classList.add('hidden'));
+            const target = document.getElementById('donate-step-' + stepNum);
+            if (target) target.classList.remove('hidden');
+
+            if (stepNum === 3 && provider) {
+                const isMtn = provider === 'mtn';
+                const icon = document.getElementById('donate-provider-icon');
+                const name = document.getElementById('donate-provider-name');
+                const code = document.getElementById('donate-ussd-code');
+
+                if (icon) {
+                    icon.className = 'w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg';
+                    icon.classList.add(isMtn ? 'bg-yellow-50' : 'bg-red-50');
+                    icon.classList.add(isMtn ? 'text-yellow-600' : 'text-red-600');
+                    icon.textContent = isMtn ? 'MTN' : 'Airtel';
+                }
+                if (name) name.textContent = isMtn ? 'MTN Mobile Money' : 'Airtel Money';
+                if (code) code.textContent = isMtn ? '*165#' : '*185#';
+            }
         }
 
         donateBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 openDonateModal();
+            });
+        });
+
+        document.querySelectorAll('[data-donate-goto]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const step = parseInt(btn.getAttribute('data-donate-goto'));
+                const provider = btn.getAttribute('data-donate-provider');
+                document.querySelectorAll('[data-donate-provider]').forEach(b => b.classList.remove('active'));
+                if (provider) btn.classList.add('active');
+                goToDonateStep(step, provider);
             });
         });
 
@@ -525,6 +570,45 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeDonateModal();
             }
         });
+
+        // MoMo form submit → generate receipt
+        const momoForm = document.getElementById('donate-momo-form');
+        if (momoForm) {
+            momoForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const name = document.getElementById('donor-name').value.trim();
+                const phone = document.getElementById('donor-phone').value.trim();
+                const amount = document.getElementById('donor-amount').value;
+                const reference = document.getElementById('donor-reference').value.trim();
+
+                if (!name || !phone || !amount || !reference) return;
+
+                const selectedProvider = document.querySelector('[data-donate-provider].active')?.getAttribute('data-donate-provider') || 'mtn';
+                const providerLabel = selectedProvider === 'mtn' ? 'MTN Mobile Money' : 'Airtel Money';
+                const transactionId = 'CFU' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substring(2, 6).toUpperCase();
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('en-UG', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+                document.getElementById('receipt-name').textContent = name;
+                document.getElementById('receipt-phone').textContent = phone;
+                document.getElementById('receipt-amount').textContent = 'UGX ' + parseInt(amount).toLocaleString();
+                document.getElementById('receipt-method').textContent = providerLabel;
+                document.getElementById('receipt-reference').textContent = reference;
+                document.getElementById('receipt-transaction-id').textContent = transactionId;
+                document.getElementById('receipt-date').textContent = dateStr;
+
+                goToDonateStep(4);
+            });
+        }
+
+        // Print receipt
+        const printBtn = document.getElementById('donate-print-receipt');
+        if (printBtn) {
+            printBtn.addEventListener('click', () => {
+                window.print();
+            });
+        }
     }
 
     // ============================================

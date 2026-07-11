@@ -42,10 +42,11 @@
                 <div class="reveal-right">
                     <div class="relative">
                         <div class="rounded-2xl overflow-hidden shadow-xl">
-                            <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=800&q=85"
+                             <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=800&q=85&fm=webp"
                                  alt="Community First Uganda"
-                                 loading="lazy"
-                                 class="w-full h-[400px] lg:h-[500px] object-cover clip-reveal"
+                                 loading="eager"
+                                 fetchpriority="high"
+                                 class="w-full h-[250px] sm:h-[400px] lg:h-[500px] object-cover clip-reveal"
                                  onerror="this.parentElement.style.backgroundColor='#0B2B1D'; this.style.display='none';">
                         </div>
                         {{-- Floating stat card --}}
@@ -114,7 +115,7 @@
                         [
                             'title' => 'Literacy & Development',
                             'count' => '3 Activities',
-                            'image' => 'https://images.unsplash.com/photo-1492538368677-f6e0afe31dcc?w=800&q=85',
+                            'image' => 'https://images.unsplash.com/photo-1492538368677-f6e0afe31dcc?w=800&q=85&fm=webp',
                             'description' => 'Empowering minds through language mastery, children\'s education, and digital literacy for comprehensive learning foundation.',
                             'tags' => ['Language Classes', 'Children Classes', 'Computer Classes'],
                             'anchor' => 'literacy'
@@ -122,7 +123,7 @@
                         [
                             'title' => 'Sports & Social Engagements',
                             'count' => '4 Activities',
-                            'image' => 'https://images.unsplash.com/photo-1431324155629-1a9124e1f9c3?w=800&q=85',
+                            'image' => 'https://images.unsplash.com/photo-1431324155629-1a9124e1f9c3?w=800&q=85&fm=webp',
                             'description' => 'Building community bonds through sports, fitness, and social connections that strengthen our collective spirit.',
                             'tags' => ['Soccer', 'Aerobics', 'Gym', 'Women Groups'],
                             'anchor' => 'sports'
@@ -130,7 +131,7 @@
                         [
                             'title' => 'Community Services',
                             'count' => '6 Activities',
-                            'image' => 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=85',
+                            'image' => 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=85&fm=webp',
                             'description' => 'Comprehensive support for health, legal aid, and psychosocial wellbeing through community-centered care programs.',
                             'tags' => ['Healthcare', 'Medical Outreach', 'Legal Aid', 'Counseling', 'Trauma Healing', 'Home Welfare'],
                             'anchor' => 'services'
@@ -138,7 +139,7 @@
                         [
                             'title' => 'Livelihood Support',
                             'count' => '5 Activities',
-                            'image' => 'https://images.unsplash.com/photo-1604962914199-fc2467b2b4a3?w=800&q=85',
+                            'image' => 'https://images.unsplash.com/photo-1604962914199-fc2467b2b4a3?w=800&q=85&fm=webp',
                             'description' => 'Sustainable income generation through practical skills and entrepreneurship development for economic empowerment.',
                             'tags' => ['Crocheting', 'Henna Art', 'Tailoring', 'Soap Making', 'Computer Programming'],
                             'anchor' => 'livelihood'
@@ -194,7 +195,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <div class="reveal-left relative">
                     <div class="relative rounded-2xl overflow-hidden shadow-xl">
-                        <img src="https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=800&q=85"
+                             <img src="https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=800&q=85&fm=webp"
                              alt="Community Center"
                              loading="lazy"
                              class="w-full h-[400px] lg:h-[500px] object-cover clip-reveal"

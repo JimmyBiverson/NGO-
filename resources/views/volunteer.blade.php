@@ -8,7 +8,7 @@
     {{-- Page Hero --}}
     <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 bg-forest-900 overflow-hidden">
         <div class="particle-container absolute inset-0 z-0"></div>
-        <div class="absolute inset-0 z-[1] bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1920&q=85');"></div>
+        <div class="absolute inset-0 z-[1] bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1920&q=85&fm=webp');"></div>
         <div class="absolute inset-0 opacity-10 noise-overlay"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <span class="inline-block text-xs font-semibold uppercase tracking-widest text-amber-400 bg-white/10 px-4 py-1.5 rounded-full mb-4 reveal">Join Our Mission</span>
@@ -57,10 +57,10 @@
                 </div>
                 <div class="reveal-right">
                     <div class="relative rounded-2xl overflow-hidden shadow-xl">
-                        <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=800&q=85"
+                        <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=800&q=85&fm=webp"
                              alt="Volunteer"
                              loading="lazy"
-                             class="w-full h-[400px] object-cover clip-reveal"
+                              class="w-full h-[250px] sm:h-[350px] lg:h-[400px] object-cover clip-reveal"
                              onerror="this.parentElement.style.backgroundColor='#0B2B1D'; this.style.display='none';">
                     </div>
                 </div>
@@ -166,7 +166,7 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="reveal bg-forest-50 rounded-2xl p-8 lg:p-12 text-center">
                 <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4 shadow-md ring-2 ring-white">
-                    <img src="https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=150&q=85&fit=crop&crop=face"
+                    <img src="https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=150&q=85&fit=crop&crop=face&fm=webp"
                          alt="Sarah, Education Volunteer"
                          loading="lazy"
                          class="w-full h-full object-cover"

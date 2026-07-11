@@ -226,6 +226,7 @@
 .hero-reveal {
     opacity: 0;
     transform: translateY(30px);
+    will-change: transform, opacity;
 }
 
 .hero-text-slide {
@@ -241,13 +242,8 @@
     pointer-events: auto;
 }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-}
-
 /* ============================================
-   SPLIT TEXT
+    SPLIT TEXT
    ============================================ */
 .split-char {
     display: inline-block;
@@ -528,6 +524,7 @@
     border-left: 3px solid rgba(74, 222, 128, 0.5);
     box-shadow: -10px 0 50px rgba(0, 0, 0, 0.3), inset 1px 0 0 rgba(74, 222, 128, 0.3);
     height: 100vh;
+    height: 100dvh;
 }
 
 .mobile-nav-link {
@@ -622,10 +619,74 @@ body.menu-open {
 }
 
 /* ============================================
-   DONATION MODAL
-   ============================================ */
+    DONATION MODAL
+    ============================================ */
 #donate-modal > div {
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.donate-step.hidden {
+    display: none;
+}
+
+/* ============================================
+    RECEIPT — PRINT STYLES
+    ============================================ */
+@media print {
+    body * {
+        visibility: hidden !important;
+    }
+
+    #donate-modal,
+    #donate-modal * {
+        visibility: visible !important;
+    }
+
+    #donate-modal {
+        position: absolute !important;
+        inset: 0 !important;
+        z-index: 9999 !important;
+        background: white !important;
+    }
+
+    #donate-modal > div:first-child,
+    #donate-close,
+    #donate-step-1,
+    #donate-step-2,
+    #donate-step-3,
+    .donate-step button[data-donate-goto],
+    #donate-print-receipt,
+    #donate-modal .donate-step button:not([type="submit"]) {
+        display: none !important;
+    }
+
+    #donate-step-4 {
+        display: block !important;
+        position: relative !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        max-width: 400px !important;
+        margin: 0 auto !important;
+    }
+
+    #donate-modal > div:last-child {
+        position: relative !important;
+        transform: none !important;
+        box-shadow: none !important;
+        border: none !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 2rem !important;
+    }
+
+    #donate-receipt {
+        text-align: center !important;
+    }
+
+    #donate-receipt .bg-gray-50 {
+        border: 1px solid #e5e7eb !important;
+        background: white !important;
+    }
 }
 
 /* ============================================
@@ -726,7 +787,7 @@ body.menu-open {
 /* ============================================
    RESPONSIVE HELPERS
    ============================================ */
-@media (max-width: 768px) {
+@media (max-width: 1023px) {
     #custom-cursor, #cursor-dot {
         display: none !important;
     }
