@@ -6,9 +6,22 @@
 - `mod_rewrite` enabled (Apache)
 - Composer (run `composer install --no-dev` on the server if SSH is available)
 
+## Step 0 — Build Assets (IMPORTANT!)
+
+Before uploading, you **MUST** build the frontend assets locally:
+
+```bash
+npm install          # Install dependencies (if not done)
+npm run build        # Build CSS, JS, and fonts into public/build/
+```
+
+This creates the `public/build/` directory with all compiled assets. **Do NOT skip this step** — the website will not have styles without it.
+
 ## Step 1 — Upload Files
 
 Upload the **entire project folder** to `public_html/` via cPanel File Manager or FTP.
+
+**CRITICAL**: Make sure `public/build/` directory is included in your upload!
 
 Your `public_html/` structure should look like:
 
@@ -20,6 +33,10 @@ public_html/
 ├── database/
 ├── lang/
 ├── public/          ← Laravel's public directory
+│   ├── build/       ← ✅ CSS, JS, fonts (MUST be here!)
+│   ├── images/
+│   ├── favicon.ico
+│   └── index.php
 ├── resources/
 ├── routes/
 ├── storage/
@@ -33,14 +50,26 @@ public_html/
 
 > If your hosting has SSH access, upload to a directory outside `public_html` and symlink `public/` into it. That is more secure.
 
-## Step 2 — Set Directory Permissions
+## Step 2 — Verify Assets Upload
+
+In cPanel File Manager, navigate to `public/build/` and verify these files exist:
+
+- `manifest.json`
+- `assets/app-*.css`
+- `assets/app-*.js`
+- `assets/fonts-*.css`
+- `assets/instrument-sans-*.woff` and `.woff2` files
+
+If any files are missing, the website will load without styles and animations. Go back and re-upload the `public/build/` directory completely.
+
+## Step 3 — Set Directory Permissions
 
 In cPanel File Manager, set the following directories to **755** (or "Write" permission):
 
 - `storage/` (and all subdirectories)
 - `bootstrap/cache/`
 
-## Step 3 — Configure Environment
+## Step 4 — Configure Environment
 
 Edit `.env` in cPanel File Manager and update these values:
 
@@ -70,7 +99,7 @@ php artisan key:generate
 
 If no SSH, generate a key locally with `php artisan key:generate` and paste the new value into your production `.env`.
 
-## Step 4 — Run Migrations (if using database)
+## Step 5 — Run Migrations (if using database)
 
 The application uses file-based session, cache, and queue by default — no database tables are needed for basic operation.
 
@@ -80,7 +109,7 @@ If you plan to use database sessions/cache/queue, run:
 php artisan migrate --force
 ```
 
-## Step 5 — SMTP Configuration (for Contact/Volunteer forms)
+## Step 6 — SMTP Configuration (for Contact/Volunteer forms)
 
 Update the mail section in `.env`:
 
@@ -103,7 +132,7 @@ For Gmail SMTP, use:
 - `MAIL_ENCRYPTION=tls`
 - Use an App Password (not your regular password)
 
-## Step 6 — Verify
+## Step 7 — Verify
 
 Visit your domain. The site should load with all styles, images, and animations working.
 
@@ -111,9 +140,10 @@ Visit your domain. The site should load with all styles, images, and animations 
 
 | Issue | Fix |
 |---|---|
+| Website has no CSS/styling | **Step 0 issue**: Did you run `npm run build` before uploading? Check that `public/build/` directory exists on server with CSS and JS files. Re-upload if missing. |
 | 500 Internal Server Error | Check `.env` exists and `APP_KEY` is set. Check `storage/logs/` for errors. |
 | White page | Ensure PHP 8.3+ is selected in cPanel > PHP Selector. |
-| Assets not loading | Confirm `public/build/` directory was uploaded with all files. |
+| Assets return 404 | Confirm `public/build/` directory was uploaded with all files intact. Verify file permissions. |
 | Session not persisting | Ensure `storage/framework/sessions/` is writable (755). |
 | Routes return 404 | Confirm `mod_rewrite` is enabled. Check that `.htaccess` files were uploaded. |
 
@@ -122,3 +152,18 @@ Visit your domain. The site should load with all styles, images, and animations 
 The root `.htaccess` rewrites all incoming requests to `public/index.php` (Laravel's front controller). Sensitive directories (`config/`, `routes/`, `storage/`, etc.) are blocked from web access via Apache deny rules.
 
 This setup works identically on both localhost (Laragon) and shared hosting — no code changes needed between environments.
+
+## CloudPanel / Private Server Notes
+
+- Document root must point to the Laravel `public/` folder. In CloudPanel set the **Root Directory** to `yourdomain.com/public` (for this site: `ngosite.duckdns.org/public`). If the document root points to the project root the server will not be able to find `/build/assets/*` and the site will load unstyled.
+- If you use Varnish, purge its cache after deploying new assets: CloudPanel → Site → Varnish Cache → "Purge Entire Cache" or purge individual URLs/tags.
+- If changes are not visible after updating the Root Directory or assets, reload the web server (requires SSH):
+
+```bash
+sudo systemctl reload nginx
+```
+
+Or use CloudPanel's controls to restart the site/PHP-FPM if SSH is not available.
+- Always run `npm run build` locally and upload the entire `public/build/` directory before finishing deployment. Verify `manifest.json`, `assets/app-*.css`, `assets/app-*.js`, and font files are present on the server.
+
+These CloudPanel-specific steps solved the issue where assets existed on disk but returned 404 because the site was served from the project root instead of the `public/` folder.
