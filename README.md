@@ -1,5 +1,7 @@
 # Community First Uganda
 
+🔗   https://ngosite.duckdns.org/
+
 A modern community organization website developed for **Community First Uganda (CFU)** to showcase its mission, programs, community impact, and opportunities for people to get involved.
 
 The platform provides information about CFU's work in **education, community services, sports and social engagement, and livelihood support**, while also providing features for volunteering, donations, blog content, galleries, FAQs, and contact management.
